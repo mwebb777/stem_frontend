@@ -12,7 +12,6 @@ const ListContainer = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
-
 const FormContainer = styled.div`
   background: #f8f9fa;
   border-radius: 6px;
