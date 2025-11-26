@@ -1,0 +1,5 @@
+@echo off
+echo Starting Event Registration System...
+call npm start
+
+pause
