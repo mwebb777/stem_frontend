@@ -76,7 +76,7 @@ function RegistrationList() {
   useEffect(() => {
     const fetchRegistrations = async () => {
       try {
-        const response = await axios.get(`${API_URL}/registrations`);
+        const response = await axios.get(`${API_URL}/api/registrations`);
         setRegistrations(response.data);
         setLoading(false);
       } catch (err) {

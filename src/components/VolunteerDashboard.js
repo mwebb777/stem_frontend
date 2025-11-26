@@ -147,7 +147,7 @@ function VolunteerDashboard() {
         const fetchData = async () => {
             try {
                 const [volunteersRes] = await Promise.all([
-                    axios.get(`${API_URL}/volunteers`),
+                    axios.get(`${API_URL}/api/volunteers`),
                 ]);
 
                 setVolunteers(volunteersRes.data);

@@ -199,7 +199,7 @@ function ReportMedicalForm() {
         const fetchData = async () => {
             try {
                 const [studentsRes] = await Promise.all([
-                    axios.get(`${API_URL}/students`),
+                    axios.get(`${API_URL}/api/students`),
                 ]);
 
                 setStudents(studentsRes.data);

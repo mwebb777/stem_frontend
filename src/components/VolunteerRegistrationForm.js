@@ -122,7 +122,7 @@ function VolunteerRegistrationForm() {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get(`${API_URL}/classes`);
+                const response = await axios.get(`${API_URL}/api/classes`);
                 setClasses(response.data);
                 setLoading(false);
             } catch (err) {
@@ -147,7 +147,7 @@ function VolunteerRegistrationForm() {
 
         try {
             setError(null);
-            const response = await axios.post(`${API_URL}/volunteer`, {
+            const response = await axios.post(`${API_URL}/api/volunteer`, {
                 volunteerInfo
             });
 

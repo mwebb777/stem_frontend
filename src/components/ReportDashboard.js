@@ -158,10 +158,10 @@ function ReportDashboard() {
         const fetchData = async () => {
             try {
                 const [classesRes, studentRes, studentShirtRes, volunteerShirtRes] = await Promise.all([
-                    axios.get(`${API_URL}/classes`),
-                    axios.get(`${API_URL}/students`),
-                    axios.get(`${API_URL}/student_shirts`),
-                    axios.get(`${API_URL}/volunteer_shirts`),
+                    axios.get(`${API_URL}/api/classes`),
+                    axios.get(`${API_URL}/api/students`),
+                    axios.get(`${API_URL}/api/student_shirts`),
+                    axios.get(`${API_URL}/api/volunteer_shirts`),
                 ]);
 
                 setClasses(classesRes.data);
@@ -188,7 +188,7 @@ function ReportDashboard() {
 
     const handleStudentExport = async () => {
         try {
-            const response = await axios.get(`${API_URL}/exportStudents`, {
+            const response = await axios.get(`${API_URL}/api/exportStudents`, {
                 responseType: "blob" // important!
             });
 
@@ -207,7 +207,7 @@ function ReportDashboard() {
 
     const handleVolunteerExport = async () => {
         try {
-            const response = await axios.get(`${API_URL}/exportVolunteers`, {
+            const response = await axios.get(`${API_URL}/api/exportVolunteers`, {
                 responseType: "blob" // important!
             });
 
@@ -226,7 +226,7 @@ function ReportDashboard() {
 
     const handleParentsExport = async () => {
         try {
-            const response = await axios.get(`${API_URL}/exportParents`, {
+            const response = await axios.get(`${API_URL}/api/exportParents`, {
                 responseType: "blob" // important!
             });
 

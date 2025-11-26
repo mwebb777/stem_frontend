@@ -204,7 +204,7 @@ function ClassSessionList(
     useEffect(() => {
         const fetchRoster = async () => {
             try {
-                const response = await axios.get(`${API_URL}/session/${cls.id}/${sessionId}`);
+                const response = await axios.get(`${API_URL}/api/session/${cls.id}/${sessionId}`);
 
                 setRoster(response.data);
                 setLoading(false);

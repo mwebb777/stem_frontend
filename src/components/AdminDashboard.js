@@ -119,9 +119,9 @@ function AdminDashboard() {
         const fetchData = async () => {
             try {
                 const [classesRes, registrationsRes, studentsRes] = await Promise.all([
-                    axios.get(`${API_URL}/classes`),
-                    axios.get(`${API_URL}/registrations`),
-                    axios.get(`${API_URL}/students`),
+                    axios.get(`${API_URL}/api/classes`),
+                    axios.get(`${API_URL}/api/registrations`),
+                    axios.get(`${API_URL}/api/students`),
                 ]);
 
                 setClasses(classesRes.data);

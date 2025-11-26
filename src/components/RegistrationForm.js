@@ -138,7 +138,7 @@ function RegistrationForm() {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get(`${API_URL}/classes`);
+                const response = await axios.get(`${API_URL}/api/classes`);
                 setClasses(response.data);
                 setLoading(false);
             } catch (err) {
@@ -192,7 +192,7 @@ function RegistrationForm() {
 
         try {
             setError(null);
-            const response = await axios.post(`${API_URL}/register`, {
+            const response = await axios.post(`${API_URL}/api/register`, {
                 parentInfo,
                 students,
             });

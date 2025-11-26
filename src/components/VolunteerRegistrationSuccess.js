@@ -94,7 +94,7 @@ function VolunteerRegistrationSuccess() {
     useEffect(() => {
         const fetchRegistration = async () => {
             try {
-                const response = await axios.get(`${API_URL}/volunteers/${id}`);
+                const response = await axios.get(`${API_URL}/api/volunteers/${id}`);
                 if (response.data.success) {
                     setRegistration(response.data.registration);
                 } else {

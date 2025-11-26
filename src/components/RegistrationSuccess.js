@@ -94,7 +94,7 @@ function RegistrationSuccess() {
   useEffect(() => {
     const fetchRegistration = async () => {
       try {
-        const response = await axios.get(`${API_URL}/registrations/${id}`);
+        const response = await axios.get(`${API_URL}/api/registrations/${id}`);
         if (response.data.success) {
           setRegistration(response.data.registration);
         } else {
