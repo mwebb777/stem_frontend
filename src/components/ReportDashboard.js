@@ -166,7 +166,6 @@ function ReportDashboard() {
 
                 setClasses(classesRes.data);
                 setStudents(studentRes.data);
-                setExportStudents(exportStudentRes.data)
                 setStudentShirts(studentShirtRes.data);
                 setVolunteerShirts(volunteerShirtRes.data);
                 setLoading(false);

@@ -178,6 +178,8 @@ function StudentDashboard() {
         return <div>Loading dashboard data...</div>;
     }
 
+    setStudentInfo(students[0]);
+
     return (
         <DashboardContainer>
 
@@ -227,33 +229,15 @@ function StudentDashboard() {
                                         </Button>
                                     </TableCell>
                                     <TableCell>
-                                        <Button type="button" onClick={() => {
-                                            setStudentInfo(student)
-                                            setActiveTab("info")
-                                        }
-                                        }>
-                                            class 1
-                                        </Button>
+                                        {student.classNames[0]}
                                     </TableCell>
 
                                     <TableCell>
-                                        <Button type="button" onClick={() => {
-                                            setStudentInfo(student)
-                                            setActiveTab("info")
-                                        }
-                                        }>
-                                            class 2
-                                        </Button>
+                                        {student.classNames[1]}
                                     </TableCell>
 
                                     <TableCell>
-                                        <Button type="button" onClick={() => {
-                                            setStudentInfo(student)
-                                            setActiveTab("info")
-                                        }
-                                        }>
-                                            class 3
-                                        </Button>
+                                        {student.classNames[2]}
                                     </TableCell>
                                 </TableRow>
                             ))}

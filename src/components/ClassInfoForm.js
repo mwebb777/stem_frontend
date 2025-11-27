@@ -204,6 +204,10 @@ function ClassInfoForm({
         return cls.available_session1 <= 0;
     };
 
+    if (cls === null) {
+        return <div>No class selected</div>;
+    }
+
     return (
         <FormContainer>
             <Header>

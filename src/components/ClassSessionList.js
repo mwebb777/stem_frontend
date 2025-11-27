@@ -197,7 +197,15 @@ function ClassSessionList(
         cls,
         sessionId,
     }
-){
+) {
+    if (cls === null || cls === '') {
+        return <div>No class selected</div>;
+    }
+
+    if (sessionId === null) {
+        return <div>No session selected</div>;
+    }
+
     const [roster, setRoster] = useState([]);
     const [loading, setLoading] = useState(true);
 

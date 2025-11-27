@@ -182,6 +182,8 @@ function ClassDashboard() {
         return <div>Loading dashboard data...</div>;
     }
 
+    setActiveClass(classes[0])
+
     return (
         <DashboardContainer>
 
@@ -275,8 +277,7 @@ function ClassDashboard() {
             )}
 
             {activeTab === "info" && (
-                <p>
-                    process.env.BACKEND_URL
+                <p>                    
 
                     <ClassSessionList
                         cls={activeClass}

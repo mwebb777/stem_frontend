@@ -170,6 +170,8 @@ function VolunteerDashboard() {
         return <div>Loading dashboard data...</div>;
     }
 
+    setVolunteerInfo(volunteers[0]);
+
     return (
         <DashboardContainer>
 
