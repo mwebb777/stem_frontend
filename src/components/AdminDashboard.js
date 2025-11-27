@@ -109,7 +109,7 @@ const TableCell = styled.td`
 `;
 
 function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState("stats");
+    const [activeTab, setActiveTab] = useState("classes");
     const [classes, setClasses] = useState([]);
     const [registrations, setRegistrations] = useState([]);
     const [students, setStudents] = useState([]);
