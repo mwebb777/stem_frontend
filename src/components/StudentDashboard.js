@@ -178,7 +178,7 @@ function StudentDashboard() {
         return <div>Loading dashboard data...</div>;
     }
 
-    setStudentInfo(students[0]);
+    //setStudentInfo(students[0]);
 
     return (
         <DashboardContainer>

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 
 const ListContainer = styled.div`
@@ -211,9 +214,22 @@ const Button = styled.button`
 
 
 
+let activeStudent = "";
+
+const setActiveStudent = (student) => {
+    activeStudent = student;
+};
 function StudentInfoForm({
     student,
 }) {
+
+    if (student === null || student === '') {
+        return <div>No student selected</div>;
+    }
+
+
+    setActiveStudent(student);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         onChange({
@@ -261,12 +277,28 @@ function StudentInfoForm({
         return cls.available_session1 <= 0;
     };
 
-    const checkIn = (student) => {
+    const checkIn = async(student) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/checkin/${activeStudent.id}`);
 
+            if (response.data.success)
+                console.log("checked in");
+
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
     }
 
-    const checkOut = (student) => {
+    const checkOut = async (student) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/checkout/${activeStudent.id}`);
 
+            if (response.data.success)
+                console.log("checked out");
+
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
     }
 
     return (
