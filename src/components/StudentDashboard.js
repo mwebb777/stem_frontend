@@ -2,129 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
+import styles from "../styles.js"
+
 import StudentInfoForm from "./StudentInfoForm";
 import StudentScheduleForm from "./StudentScheduleForm";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
-
-const DashboardContainer = styled.div`
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const Title = styled.h1`
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-`;
-
-const TabsContainer = styled.div`
-  display: flex;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Tab = styled.button`
-  padding: 0.75rem 1.5rem;
-  background: ${(props) => (props.active ? "#3498db" : "transparent")};
-  color: ${(props) => (props.active ? "white" : "#34495e")};
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-
-  &:hover {
-    background: ${(props) => (props.active ? "#3498db" : "#f1f2f6")};
-  }
-`;
-
-const StatsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-`;
-
-const ClassCard = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 1rem;
-  background: white;
-`;
-
-const ClassTitle = styled.h3`
-  color: #2c3e50;
-  margin: 0 0 0.5rem;
-`;
-
-const ProgressContainer = styled.div`
-  background: #ecf0f1;
-  border-radius: 10px;
-  height: 10px;
-  overflow: hidden;
-  margin: 0.5rem 0;
-`;
-
-const ProgressBar = styled.div`
-  height: 100%;
-  background: ${(props) => {
-        const percentage = (props.value / props.max) * 100;
-        if (percentage < 60) return "#2ecc71";
-        if (percentage < 80) return "#f39c12";
-        return "#e74c3c";
-    }};
-  width: ${(props) => (props.value / props.max) * 100}%;
-`;
-
-const RegistrationTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const StudentsTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TableHead = styled.thead`
-  background: #f1f2f6;
-`;
-
-const TableRow = styled.tr`
-  border-bottom: 1px solid #ddd;
-
-  &:hover {
-    background: #f8f9fa;
-  }
-`;
-
-const TableHeader = styled.th`
-  text-align: left;
-  padding: 0.75rem;
-`;
-
-const TableCell = styled.td`
-  padding: 0.75rem;
-`;
-
-const Button = styled.button`
-  padding: 0.75rem 1.5rem;
-  background: white;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-
-  &:hover {
-    background: ${(props) => (props.primary ? "#2980b9" : "#dfe6e9")};
-  }
-
-  &:disabled {
-    background: #bdc3c7;
-    cursor: not-allowed;
-  }
-`;
 
 let activeStudent = "";
 
@@ -181,22 +64,22 @@ function StudentDashboard() {
     //setStudentInfo(students[0]);
 
     return (
-        <DashboardContainer>
+        <styles.DashboardContainer>
 
-            <TabsContainer>
-                <Tab
+            <styles.TabsContainer>
+                <styles.Tab
                     active={activeTab === "list"}
                     onClick={() => setActiveTab("list")}
                 >
                     List
-                </Tab>
-                <Tab
+                </styles.Tab>
+                <styles.Tab
                     active={activeTab === "info"}
                     onClick={() => setActiveTab("info")}
                 >
                     Info
-                </Tab>
-            </TabsContainer>
+                </styles.Tab>
+            </styles.TabsContainer>
 
             {activeTab === "list" && (
                 <p>
@@ -207,42 +90,42 @@ function StudentDashboard() {
                         onChange={(e) => setSearch(e.target.value)}
                         style={{ marginBottom: 10, padding: 8, width: '100%' }}
                     />
-                    <StudentsTable>
-                        <TableHead>
-                            <TableRow>
-                                <TableHeader>Name</TableHeader>
-                                <TableHeader>Class 1</TableHeader>
-                                <TableHeader>Class 2</TableHeader>
-                                <TableHeader>Class 3</TableHeader>
-                            </TableRow>
-                        </TableHead>
+                    <styles.Table>
+                        <styles.TableHead>
+                            <styles.TableRow>
+                                <styles.TableHeader>Name</styles.TableHeader>
+                                <styles.TableHeader>Class 1</styles.TableHeader>
+                                <styles.TableHeader>Class 2</styles.TableHeader>
+                                <styles.TableHeader>Class 3</styles.TableHeader>
+                            </styles.TableRow>
+                        </styles.TableHead>
                         <tbody>
                             {filteredUsers.map((student) => (
-                                <TableRow key={student.id}>
-                                    <TableCell>
-                                        <Button type="button" onClick={() => {
+                                <styles.TableRow key={student.id}>
+                                    <styles.TableCell>
+                                        <styles.Button type="button" onClick={() => {
                                             setStudentInfo(student)
                                             setActiveTab("info")
                                         }
                                         }>
                                             {student.name}
-                                        </Button>
-                                    </TableCell>
-                                    <TableCell>
+                                        </styles.Button>
+                                    </styles.TableCell>
+                                    <styles.TableCell>
                                         {student.classNames[0]}
-                                    </TableCell>
+                                    </styles.TableCell>
 
-                                    <TableCell>
+                                    <styles.TableCell>
                                         {student.classNames[1]}
-                                    </TableCell>
+                                    </styles.TableCell>
 
-                                    <TableCell>
+                                    <styles.TableCell>
                                         {student.classNames[2]}
-                                    </TableCell>
-                                </TableRow>
+                                    </styles.TableCell>
+                                </styles.TableRow>
                             ))}
                         </tbody>
-                    </StudentsTable>
+                    </styles.Table>
                 </p>
             )}
 
@@ -254,7 +137,7 @@ function StudentDashboard() {
                 </p>
             )}
 
-        </DashboardContainer>
+        </styles.DashboardContainer>
     );
 }
 
