@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 
 const VolunteerFormContainer = styled.div`
   background: #f8f9fa;
@@ -174,25 +179,88 @@ const Button = styled.button`
   }
 `;
 
+const CheckinButton = styled.button`
+      background: #bdc3c7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+
+      &:hover {
+        background: #c0392b;
+      }
+
+      &:disabled {
+        background: #bdc3c7;
+        cursor: not-allowed;
+      }
+    `;
+
+
+let activeVolunteer = "";
+
+const setActiveVolunteer = (volunteer) => {
+    activeVolunteer = volunteer;
+};
 
 function VolunteerInfoForm({
     volunteer,
 }) {
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        onChange({
-            ...volunteer,
-            [name]: value,
-        });
+    const [checkinStatus, setCheckinStatus] = useState('None     ');
+    const [checkinButton, setCheckinButton] = useState('Check-In');
+    const [loading, setLoading] = useState(true);
+
+
+    const updateCheckin = (volunteer) => {
+
+        if (volunteer.checkedIn && volunteer.checkedOut) {
+            setCheckinStatus('Checked-Out');
+            setCheckinButton('Set None');
+        }
+        else if (volunteer.checkedIn && !volunteer.checkedOut) {
+            setCheckinStatus('Checked-In ');
+            setCheckinButton('Check-Out');
+        }
+        else {
+            setCheckinStatus('None       ');
+            setCheckinButton('Check-In');
+        }
     };
 
-    const checkIn = (volunteer) => {
+    const checkIn = async (volunteer) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/checkin_volunteer/${activeVolunteer.id}/${checkinButton}`);
 
-    };
+            if (response.data.success)
+                console.log("checked in");
 
-    const checkOut = (volunteer) => {
+            if (checkinButton === 'Set None') {
+                activeVolunteer.checkedIn = false;
+                activeVolunteer.checkedOut = false;
+            }
+            else if (checkinButton === 'Check-In') {
+                activeVolunteer.checkedIn = true;
+                activeVolunteer.checkedOut = false;
+            }
+            else {
+                activeVolunteer.checkedIn = true;
+                activeVolunteer.checkedOut = true;
+            }
+            updateCheckin(activeVolunteer);
 
-    };
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
+    }
+
+    setActiveVolunteer(volunteer);
+
+    if (loading) {
+        updateCheckin(volunteer);
+        setLoading(false);
+    }
 
     return (
         <VolunteerFormContainer>
@@ -202,19 +270,15 @@ function VolunteerInfoForm({
 
             <FormRow>
 
-                <Button type="submit" onClick={() => {
-                    checkIn(volunteer)
-                }
-                }>
-                    Check In
-                </Button>
-
-                <Button type="button" onClick={() => {
-                    checkOut(volunteer)
-                }
-                }>
-                    Check Out
-                </Button>
+                <Label>Status:</Label>
+                <Text>{checkinStatus}</Text>
+                <CheckinButton type="button"
+                    onClick={() => {
+                        checkIn({ volunteer })
+                    }}
+                >
+                    {checkinButton}
+                </CheckinButton>
             </FormRow>
 
 
