@@ -284,6 +284,9 @@ function StudentInfoForm({
             if (response.data.success)
                 console.log("checked in");
 
+            activeStudent.checkedIn = true;
+
+
         } catch (error) {
             console.error("Export failed:", error);
         }
@@ -296,6 +299,8 @@ function StudentInfoForm({
             if (response.data.success)
                 console.log("checked out");
 
+            activeStudent.checkedOut = true;
+
         } catch (error) {
             console.error("Export failed:", error);
         }
@@ -307,20 +312,35 @@ function StudentInfoForm({
                 <Title>Student Information</Title>
             </Header>
 
-            <FormRow>                
-                <Button type="button" onClick={() => {
-                    checkIn({student})
+            <FormRow>
+                {student.checkedIn === false ?
+                    <Button type="button"
+                        onClick={() => {
+                            checkIn({ student })
+                        }}
+                    >
+                        Check In
+                    </Button>
+                    : null
                 }
-                }>
-                    Check In
-                </Button>
 
-                <Button type="button" onClick={() => {
-                    checkOut({ student })
+                {student.checkedIn == true && student.checkedOut === false ?
+                    <Button type="button"
+                        onClick={() => {
+                            checkOut({ student })
+                        }}
+                    >
+                        Check Out
+                    </Button>
+                    : null
                 }
-                }>
-                    Check Out
-                </Button>
+
+                {student.checkedIn === true && student.checkedOut === true ? 
+
+                    <Text>Checked Out</Text>
+                : null 
+                }
+
             </FormRow>
 
             <FormRow>                

@@ -59,6 +59,27 @@ const TableCell = styled.td`
 `;
 
 
+const Button = styled.button`
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${(props) => (props.primary ? "#2980b9" : "#dfe6e9")};
+  }
+
+  &:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+  }
+`;
+
+
 const RemoveButton = styled.button`
   background: #e74c3c;
   color: white;
@@ -192,6 +213,16 @@ const SelectionCount = styled.div`
 `;
 
 
+let activeClass = "";
+const setActiveClass = (cls) => {
+    activeClass = cls;
+}  
+
+let activeSessionId = "";
+const setActiveSessionId = (sessionId) => {
+    activeSessionId = sessionId;
+}
+
 function ClassSessionList(
     {
         cls,
@@ -238,6 +269,37 @@ function ClassSessionList(
         );
     }
 
+    setActiveClass(cls);
+    setActiveSessionId(sessionId);
+
+    const checkIn = async (studentId) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/checkin_class/${studentId}/${activeClass.id},${activeSessionId}`);
+
+            if (response.data.success)
+                console.log("checked in");
+
+            activeStudent.checkedIn = true;
+
+
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
+    }
+
+    const checkOut = async (student) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/checkout/${activeStudent.id}`);
+
+            if (response.data.success)
+                console.log("checked out");
+
+            activeStudent.checkedOut = true;
+
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
+    }
     return (
         <p>
             <Label>{cls.name} - Session {sessionId}</Label>
@@ -246,17 +308,50 @@ function ClassSessionList(
                     <TableHead>
                         <TableRow>
                             <TableHeader>Name</TableHeader>
-                            <TableHeader>Checked In</TableHeader>
-                            <TableHeader>Checked Out</TableHeader>
+                            <TableHeader>Status</TableHeader>
                         </TableRow>
                     </TableHead>
                 <tbody>
                     {
-                        roster.students.map((s) => (
-                            <TableRow key={s.student_id}>
+                        roster.students.map((student) => (
+                            <TableRow key={student.student_id}>
                                 <TableCell>
-                                    {s.student_name}
+                                    {student.student_name}
                                 </TableCell>
+
+                                <TableCell>
+                                    {student.checkedIn === false ?
+                                        <Button type="button"
+                                            value={student.student_id}
+                                            onClick={(event) => {
+                                                checkIn(event.target.value )
+                                            }}
+                                        >
+                                            Check In
+                                        </Button>
+                                        : null
+                                    }
+
+                                    {student.checkedIn == true && student.checkedOut === false ?
+                                        <Button type="button"
+                                            onClick={() => {
+                                                checkOut({ student })
+                                            }}
+                                        >
+                                            Check Out
+                                        </Button>
+                                        : null
+                                    }
+
+                                    {student.checkedIn === true && student.checkedOut === true ?
+
+                                        <Text>Checked Out</Text>
+                                        : null
+                                    }
+
+                                </TableCell>
+
+
                             </TableRow>
                         ))
                     }
