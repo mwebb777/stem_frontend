@@ -204,9 +204,6 @@ function VolunteerDashboard() {
                     <TableHead>
                         <TableRow>
                             <TableHeader>Name</TableHeader>
-                            <TableHeader>Class 1</TableHeader>
-                            <TableHeader>Class 2</TableHeader>
-                            <TableHeader>Class 3</TableHeader>
                         </TableRow>
                     </TableHead>
                     <tbody>
@@ -219,34 +216,6 @@ function VolunteerDashboard() {
                                         }
                                     }>
                                         {vol.name}
-                                    </Button>
-                                </TableCell>
-                                <TableCell>
-                                    <Button type="button" onClick={() => {
-                                        setVolunteerInfo(vol)
-                                        setActiveTab("info")
-                                    }
-                                    }>
-                                    class 1
-                                    </Button>
-                                </TableCell>
-
-                                <TableCell>
-                                    <Button type="button" onClick={() => {
-                                        setVolunteerInfo(vol)
-                                        setActiveTab("info")
-                                    }
-                                    }>
-                                        class 2
-                                    </Button>
-                                </TableCell>
-                                <TableCell>
-                                    <Button type="button" onClick={() => {
-                                        setVolunteerInfo(vol)
-                                        setActiveTab("info")
-                                    }
-                                    }>
-                                        class 3
                                     </Button>
                                 </TableCell>
                             </TableRow>

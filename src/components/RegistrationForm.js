@@ -110,6 +110,7 @@ function RegistrationForm() {
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isWaiverChecked, setWaiverChecked] = useState(false);
     const navigate = useNavigate();
 
     const [parentInfo, setParentInfo] = useState({
@@ -209,7 +210,7 @@ function RegistrationForm() {
 
     const isFormValid = () => {
         if (!parentInfo.name || !parentInfo.email || !parentInfo.phone ||
-            !parentInfo.password) {
+            !parentInfo.password ||!isWaiverChecked) {
             return false;
         }
 
@@ -313,6 +314,43 @@ function RegistrationForm() {
                         </Button>
                     </ButtonContainer>
                 </Section>
+
+
+                <Section>
+                    <SectionTitle>Waiver 1</SectionTitle>
+                    <StudentsContainer>
+                        <p>
+                        This is waiver one.
+                        </p>
+                    </StudentsContainer>
+                </Section>
+
+                <Section>
+                    <SectionTitle>Waiver 2</SectionTitle>
+                    <StudentsContainer>
+                        <p>
+                            This is waiver two.
+                        </p>
+                    </StudentsContainer>
+                </Section>
+
+                <Section>
+                    <SectionTitle>Waiver 3</SectionTitle>
+                    <StudentsContainer>
+                        <p>
+                            This is waiver three.
+                        </p>
+                    </StudentsContainer>
+                </Section>
+
+                <Label> Accept Waivers: {'  '}
+                    <input
+                    type="checkbox"
+                    checked={isWaiverChecked}
+                    onChange={(e) => setWaiverChecked(e.target.checked)}
+                    />
+                </Label>
+
 
                 <SubmitButton type="submit" disabled={!isFormValid()} primary>
                     Complete Registration

@@ -223,10 +223,31 @@ const setActiveSessionId = (sessionId) => {
     activeSessionId = sessionId;
 }
 
+const CheckinButton = styled.button`
+      background: #bdc3c7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+
+      &:hover {
+        background: #c0392b;
+      }
+
+      &:disabled {
+        background: #bdc3c7;
+        cursor: not-allowed;
+      }
+    `;
+
+
 function ClassSessionList(
     {
         cls,
         sessionId,
+        enrolled,
     }
 ) {
     if (cls === null || cls === '') {
@@ -239,6 +260,8 @@ function ClassSessionList(
 
     const [roster, setRoster] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [checkinStatus, setCheckinStatus] = useState('None     ');
+    const [checkinButton, setCheckinButton] = useState('Check-In');
 
     useEffect(() => {
         const fetchRoster = async () => {
@@ -256,6 +279,52 @@ function ClassSessionList(
         fetchRoster();
     }, []);
 
+    const updateCheckin = (student) => {
+
+        if (student.checkedIn && student.checkedOut) {
+            setCheckinStatus('Checked-Out');
+            setCheckinButton('Set None');
+        }
+        else if (student.checkedIn && !student.checkedOut) {
+            setCheckinStatus('Checked-In ');
+            setCheckinButton('Check-Out');
+        }
+        else {
+            setCheckinStatus('None       ');
+            setCheckinButton('Check-In');
+        }
+    };
+
+    const checkIn = async (event)  => {
+        try {
+            const studentId = event.target.value;
+
+            const response = await axios.post(`${API_URL}/api/checkin_class/${studentId}/${activeClass.id}/${activeSessionId}/${checkinButton}`);
+
+            if (response.data.success)
+                console.log("checked in");
+
+            if (checkinButton === 'Set None') {
+                student.checkedIn = false;
+                student.checkedOut = false;
+            }
+            else if (checkinButton === 'Check-In') {
+                student.checkedIn = true;
+                student.checkedOut = false;
+            }
+            else {
+                student.checkedIn = true;
+                student.checkedOut = true;
+            }
+            updateCheckin(student);
+
+            window.location.reload(true);
+
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
+    }
+
     if (loading) {
         return <div>Loading registrations...</div>;
     }
@@ -272,37 +341,9 @@ function ClassSessionList(
     setActiveClass(cls);
     setActiveSessionId(sessionId);
 
-    const checkIn = async (studentId) => {
-        try {
-            const response = await axios.post(`${API_URL}/api/checkin_class/${studentId}/${activeClass.id},${activeSessionId}`);
-
-            if (response.data.success)
-                console.log("checked in");
-
-            activeStudent.checkedIn = true;
-
-
-        } catch (error) {
-            console.error("Export failed:", error);
-        }
-    }
-
-    const checkOut = async (student) => {
-        try {
-            const response = await axios.post(`${API_URL}/api/checkout/${activeStudent.id}`);
-
-            if (response.data.success)
-                console.log("checked out");
-
-            activeStudent.checkedOut = true;
-
-        } catch (error) {
-            console.error("Export failed:", error);
-        }
-    }
-    return (
+   return (
         <p>
-            <Label>{cls.name} - Session {sessionId}</Label>
+           <Label>{cls.name} - Session {sessionId} - Enrolled: {enrolled}</Label>
 
                 <Table>
                     <TableHead>
@@ -320,37 +361,19 @@ function ClassSessionList(
                                 </TableCell>
 
                                 <TableCell>
-                                    {student.checkedIn === false ?
-                                        <Button type="button"
-                                            value={student.student_id}
-                                            onClick={(event) => {
-                                                checkIn(event.target.value )
-                                            }}
-                                        >
-                                            Check In
-                                        </Button>
-                                        : null
-                                    }
-
-                                    {student.checkedIn == true && student.checkedOut === false ?
-                                        <Button type="button"
-                                            onClick={() => {
-                                                checkOut({ student })
-                                            }}
-                                        >
-                                            Check Out
-                                        </Button>
-                                        : null
-                                    }
-
-                                    {student.checkedIn === true && student.checkedOut === true ?
-
-                                        <Text>Checked Out</Text>
-                                        : null
-                                    }
-
+                                    <Text>{checkinStatus}</Text>
                                 </TableCell>
 
+                                <TableCell>
+                                    <CheckinButton type="button"
+                                        value={student.student_id}
+                                        onClick={() => {
+                                            checkIn(event)
+                                        }}
+                                    >
+                                        {checkinButton}
+                                    </CheckinButton>
+                                </TableCell>
 
                             </TableRow>
                         ))

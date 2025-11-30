@@ -212,6 +212,25 @@ const Button = styled.button`
   }
 `;
 
+const CheckinButton = styled.button`
+      background: #bdc3c7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+
+      &:hover {
+        background: #c0392b;
+      }
+
+      &:disabled {
+        background: #bdc3c7;
+        cursor: not-allowed;
+      }
+    `;
+
 
 
 let activeStudent = "";
@@ -223,88 +242,57 @@ function StudentInfoForm({
     student,
 }) {
 
+    const [checkinStatus, setCheckinStatus] = useState('None     ');
+    const [checkinButton, setCheckinButton] = useState('Check-In');
+
     if (student === null || student === '') {
         return <div>No student selected</div>;
     }
 
-
     setActiveStudent(student);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        onChange({
-            ...student,
-            [name]: value,
-        });
-    };
+    const updateCheckin = (student) => {
 
-    const toggleClassSelection = (classId) => {
-        const currentSelections = [...student.classSelections];
-        const classIndex = currentSelections.indexOf(classId);
-
-        // If already selected, remove it
-        if (classIndex >= 0) {
-            currentSelections.splice(classIndex, 1);
-            onChange({
-                ...student,
-                classSelections: currentSelections,
-            });
-            return;
+        if (student.checkedIn && student.checkedOut) {
+            setCheckinStatus('Checked-Out');
+            setCheckinButton('Set None');
         }
-
-        // If not selected and under 3, add it
-        if (currentSelections.length < 3) {
-            onChange({
-                ...student,
-                classSelections: [...currentSelections, classId],
-            });
-            return;
+        else if (student.checkedIn && !student.checkedOut) {
+            setCheckinStatus('Checked-In ');
+            setCheckinButton('Check-Out');
         }
-    };
-
-    const isClassSelected = (classId) => {
-        return student.classSelections.includes(classId);
-    };
-
-    const isClassDisabled = (cls) => {
-        // If already selected, never disabled
-        if (isClassSelected(cls.id)) return false;
-
-        // If at max selections, disable unselected classes
-        if (student.classSelections.length >= 3) return true;
-
-        // If class is full, disable it
-        return cls.available_session1 <= 0;
+        else {
+            setCheckinStatus('None       ');
+            setCheckinButton('Check-In');
+        }
     };
 
     const checkIn = async(student) => {
         try {
-            const response = await axios.post(`${API_URL}/api/checkin/${activeStudent.id}`);
+            const response = await axios.post(`${API_URL}/api/checkin/${activeStudent.id}/${checkinButton}`);
 
             if (response.data.success)
                 console.log("checked in");
 
-            activeStudent.checkedIn = true;
-
-
-        } catch (error) {
-            console.error("Export failed:", error);
-        }
-    }
-
-    const checkOut = async (student) => {
-        try {
-            const response = await axios.post(`${API_URL}/api/checkout/${activeStudent.id}`);
-
-            if (response.data.success)
-                console.log("checked out");
-
-            activeStudent.checkedOut = true;
+            if (checkinButton === 'Set None') {
+                activeStudent.checkedIn = false;
+                activeStudent.checkedOut = false;
+            }
+            else if (checkinButton === 'Check-In') {
+                activeStudent.checkedIn = true;
+                activeStudent.checkedOut = false;
+            }
+            else {
+                activeStudent.checkedIn = true;
+                activeStudent.checkedOut = true;
+            }
+            updateCheckin(activeStudent);
 
         } catch (error) {
             console.error("Export failed:", error);
         }
     }
+
 
     return (
         <FormContainer>
@@ -313,33 +301,15 @@ function StudentInfoForm({
             </Header>
 
             <FormRow>
-                {student.checkedIn === false ?
-                    <Button type="button"
-                        onClick={() => {
-                            checkIn({ student })
-                        }}
-                    >
-                        Check In
-                    </Button>
-                    : null
-                }
-
-                {student.checkedIn == true && student.checkedOut === false ?
-                    <Button type="button"
-                        onClick={() => {
-                            checkOut({ student })
-                        }}
-                    >
-                        Check Out
-                    </Button>
-                    : null
-                }
-
-                {student.checkedIn === true && student.checkedOut === true ? 
-
-                    <Text>Checked Out</Text>
-                : null 
-                }
+                <Label>Status:</Label>
+                <Text>{checkinStatus}</Text>
+                <CheckinButton type="button"
+                    onClick={() => {
+                        checkIn({ student })
+                    }}
+                >
+                    {checkinButton}
+                </CheckinButton>
 
             </FormRow>
 

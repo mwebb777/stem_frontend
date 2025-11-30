@@ -52,7 +52,8 @@ function ClassDashboard() {
         return <div>Loading dashboard data...</div>;
     }
 
-    setActiveClass(classes[0])
+    if (activeClass === null || activeClass === '')
+        setActiveClass(classes[0])
 
     return (
         <styles.DashboardContainer>
@@ -152,16 +153,19 @@ function ClassDashboard() {
                     <ClassSessionList
                         cls={activeClass}
                         sessionId="1"
+                        enrolled={activeClass.enrolled_session1}
                     />
 
                     <ClassSessionList
                         cls={activeClass}
                         sessionId="2"
+                        enrolled={activeClass.enrolled_session2}
                     />
 
                     <ClassSessionList
                         cls={activeClass}
                         sessionId="3"
+                        enrolled={activeClass.enrolled_session3}
                     />
                 </p>
             )}
@@ -173,6 +177,7 @@ function ClassDashboard() {
                         <ClassSessionList
                             cls={cls}
                             sessionId="1"
+                            enrolled={cls.enrolled_session1}
                         />
                     ))}
                 </p>
@@ -185,6 +190,7 @@ function ClassDashboard() {
                         <ClassSessionList
                             cls={cls}
                             sessionId="2"
+                            enrolled={cls.enrolled_session2}
                         />
                     ))}
                 </p>
@@ -197,6 +203,7 @@ function ClassDashboard() {
                         <ClassSessionList
                             cls={cls}
                             sessionId="3"
+                            enrolled={cls.enrolled_session3}
                         />
                     ))}
                 </p>
