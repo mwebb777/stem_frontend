@@ -133,6 +133,8 @@ function RegistrationForm() {
             class1: "",
             class2: "",
             class3: "",
+            checkedIn: false,
+            checkedOut: false,
         },
     ]);
 
@@ -180,6 +182,8 @@ function RegistrationForm() {
                 class1: "",
                 class2: "",
                 class3: "",
+                checkedIn: false,
+                checkedOut: false,
             },
         ]);
     };
