@@ -3,6 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 const FormContainer = styled.div`
   background: #f8f9fa;
   border-radius: 6px;
@@ -232,15 +234,18 @@ function ReportAllergiesForm() {
                 </TableHead>
                 <tbody>
                     {filteredUsers.map((student) => (
-                        <TableRow key={student.id}>
-                            <TableCell>
-                                {student.name}
-                            </TableCell>
-                            <TableCell>
-                                {student.allergies}
-                            </TableCell>
 
-                        </TableRow>
+                            student.allergies != 'none' ? 
+                                <TableRow key={student.id}>
+                                    <TableCell>
+                                        {student.name}
+                                    </TableCell>
+                                    <TableCell>
+                                        {student.allergies}
+                                    </TableCell>
+
+                            </TableRow>
+                            : null
                     ))}
                 </tbody>
             </Table>

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 const FormContainer = styled.div`
   background: #f8f9fa;
   border-radius: 6px;
