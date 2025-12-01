@@ -217,9 +217,9 @@ function RegistrationForm() {
                     </css.ListContainer>
 
                     <css.ButtonContainer>
-                        <css.Button type="button" onClick={addStudent}>
+                        <css.DarkButton type="button" onClick={addStudent}>
                             Add Another Student
-                        </css.Button>
+                        </css.DarkButton>
                     </css.ButtonContainer>
                 </css.Section>
 

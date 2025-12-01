@@ -71,24 +71,24 @@ function ClassDashboard() {
                 >
                     Info
                 </css.Tab>
-                <css.Tab
-                    active={activeTab === "session1"}
-                    onClick={() => setActiveTab("session1")}
-                >
-                    Session 1
-                </css.Tab>
-                <css.Tab
-                    active={activeTab === "session2"}
-                    onClick={() => setActiveTab("session2")}
-                >
-                    Session 2
-                </css.Tab>
-                <css.Tab
-                    active={activeTab === "session3"}
-                    onClick={() => setActiveTab("session3")}
-                >
-                    Session 3
-                </css.Tab>
+                {/*<css.Tab*/}
+                {/*    active={activeTab === "session1"}*/}
+                {/*    onClick={() => setActiveTab("session1")}*/}
+                {/*>*/}
+                {/*    Session 1*/}
+                {/*</css.Tab>*/}
+                {/*<css.Tab*/}
+                {/*    active={activeTab === "session2"}*/}
+                {/*    onClick={() => setActiveTab("session2")}*/}
+                {/*>*/}
+                {/*    Session 2*/}
+                {/*</css.Tab>*/}
+                {/*<css.Tab*/}
+                {/*    active={activeTab === "session3"}*/}
+                {/*    onClick={() => setActiveTab("session3")}*/}
+                {/*>*/}
+                {/*    Session 3*/}
+                {/*</css.Tab>*/}
             </css.TabsContainer>
 
             {activeTab === "list" && (

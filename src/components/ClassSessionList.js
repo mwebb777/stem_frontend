@@ -36,8 +36,8 @@ function ClassSessionList(
 
     const [roster, setRoster] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [checkinStatus, setCheckinStatus] = useState('None     ');
-    const [checkinButton, setCheckinButton] = useState('Check-In');
+    const [checkinStatus, setCheckinStatus] = useState([]);
+    const [checkinButton, setCheckinButton] = useState([]);
 
     useEffect(() => {
         const fetchRoster = async () => {
@@ -46,6 +46,36 @@ function ClassSessionList(
 
                 setRoster(response.data);
                 setLoading(false);
+
+                let statusText = '';
+                let buttonText = '';
+
+                const nextStatusList = [...checkinStatus];
+                const nextButtonList = [...checkinButton];
+
+                for (let i = 0; i < response.data.students.length; i++) {
+
+                    let student = response.data.students[i];
+
+                    if (student.checkedIn && student.checkedOut) {
+                        statusText = 'Checked-Out';
+                        buttonText = 'Set None';
+                    }
+                    else if (student.checkedIn && !student.checkedOut) {
+                        statusText = 'Checked-In ';
+                        buttonText = 'Check-Out';
+                    }
+                    else {
+                        statusText = 'None       ';
+                        buttonText = 'Check-In';
+                    }
+
+                    nextStatusList.push({ text: statusText, });
+                    nextButtonList.push({ text: buttonText, });
+                }
+                setCheckinStatus(nextStatusList);
+                setCheckinButton(nextButtonList);
+
             } catch (err) {
                 console.error("Failed to load roster:", err);
                 setLoading(false);
@@ -55,36 +85,61 @@ function ClassSessionList(
         fetchRoster();
     }, []);
 
-    const updateCheckin = (student) => {
+    const updateCheckin = (student, index) => {
+
+        let statusText = '';
+        let buttonText = '';
 
         if (student.checkedIn && student.checkedOut) {
-            setCheckinStatus('Checked-Out');
-            setCheckinButton('Set None');
+            statusText = 'Checked-Out';
+            buttonText = 'Set None';
         }
         else if (student.checkedIn && !student.checkedOut) {
-            setCheckinStatus('Checked-In ');
-            setCheckinButton('Check-Out');
+            statusText = 'Checked-In ';
+            buttonText = 'Check-Out';
         }
         else {
-            setCheckinStatus('None       ');
-            setCheckinButton('Check-In');
+            statusText = 'None       ';
+            buttonText = 'Check-In';
         }
+
+        let nextStatusList = [...checkinStatus];
+        let nextButtonList = [...checkinButton];
+
+        nextStatusList[index].text = statusText;
+        nextButtonList[index].text = buttonText;
+
+        setCheckinStatus(nextStatusList);
+        setCheckinButton(nextButtonList);
+
+    //    setCheckinStatus((prev) => [
+    //        prev.map((status) => (status.text = statusText)),
+    //    ]);
+
+    //    setCheckinButton((prev) => [
+    //        prev.map((status) => (status.text = buttonText)),
+    //    ]);
     };
 
     const checkIn = async (event)  => {
         try {
-            const studentId = event.target.value;
+            let index = event.target.value;
+            let student = roster.students[event.target.value];
+            const studentId = student.student_id;
+            let buttonText = checkinButton[event.target.value].text;
 
-            const response = await axios.post(`${API_URL}/api/checkin_class/${studentId}/${activeClass.id}/${activeSessionId}/${checkinButton}`);
+            const response = await axios.post(`${API_URL}/api/checkin_class/${studentId}/${activeClass.id}/${activeSessionId}/${buttonText}`);
+
 
             if (response.data.success)
                 console.log("checked in");
 
-            if (checkinButton === 'Set None') {
+
+            if (buttonText === 'Set None') {
                 student.checkedIn = false;
                 student.checkedOut = false;
             }
-            else if (checkinButton === 'Check-In') {
+            else if (buttonText === 'Check-In') {
                 student.checkedIn = true;
                 student.checkedOut = false;
             }
@@ -92,9 +147,9 @@ function ClassSessionList(
                 student.checkedIn = true;
                 student.checkedOut = true;
             }
-            updateCheckin(student);
+            updateCheckin(student, index);
 
-            window.location.reload(true);
+           // window.location.reload(true);
 
         } catch (error) {
             console.error("Export failed:", error);
@@ -134,24 +189,24 @@ function ClassSessionList(
                     </css.TableHead>
                 <tbody>
                     {
-                        roster.students.map((student) => (
+                        roster.students.map((student, index) => (
                             <css.TableRow key={student.student_id}>
                                 <css.TableCell>
                                     {student.student_name}
                                 </css.TableCell>
 
                                 <css.TableCell>
-                                    <css.Text>{checkinStatus}</css.Text>
+                                    <css.Text>{checkinStatus[index].text}</css.Text>
                                 </css.TableCell>
 
                                 <css.TableCell>
                                     <css.DarkButton type="button"
-                                        value={student.student_id}
+                                        value={index}
                                         onClick={() => {
                                             checkIn(event)
                                         }}
                                     >
-                                        {checkinButton}
+                                        {checkinButton[index].text}
                                     </css.DarkButton>
                                 </css.TableCell>
 
