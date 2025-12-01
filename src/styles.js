@@ -23,9 +23,74 @@ export default {
       gap: 1rem;
     `,
 
+    SuccessContainer = styled.div`
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    `,
+
+    SuccessIcon = styled.div`
+      color: #27ae60;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    `,
+
     ButtonContainer = styled.div`
       display: flex;
       gap: 1rem;
+      margin-top: 1rem;
+    `,
+
+    SuccessIcon = styled.div`
+      color: #27ae60;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    `,
+
+
+    RegistrationDetails = styled.div`
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 6px;
+    `,
+
+    RegistrationItem = styled.div`
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: #f8f9fa;
+    `,
+
+    RegistrationHeader = styled.div`
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #ddd;
+    `,
+
+    RegistrationId = styled.div`
+      font-weight: bold;
+      color: #3498db;
+    `,
+
+    RegistrationDate = styled.div`
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    `,
+
+    ParentInfo = styled.div`
+      margin-bottom: 1rem;
+    `,
+
+    StudentsContainer = styled.div`
       margin-top: 1rem;
     `,
 
@@ -47,6 +112,11 @@ export default {
       background: #fadbd8;
       border-radius: 4px;
       margin-bottom: 1rem;
+    `,
+
+    Message = styled.p`
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     `,
 
     FormContainer: styled.div`
@@ -215,6 +285,10 @@ export default {
       }
     `,
 
+    StudentName = styled.h4`
+      color: #2c3e50;
+      margin: 0 0 0.5rem;
+    `,
     ClassesSection: styled.div`
       margin-top: 1.5rem;
     `,

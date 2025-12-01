@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import css from "styles.js"
+import css from "../styles.js"
 
 import StudentDashboard from "./StudentDashboard";
 import ReportDashboard from "./ReportDashboard";
