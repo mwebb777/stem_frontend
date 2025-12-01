@@ -42,7 +42,7 @@ function RegistrationSuccess() {
       <css.SuccessContainer>
         <css.Title>Error</css.Title>
         <css.Message>{error || "Registration not found."}</css.Message>
-        <css.Button to="/">Return to Registration</css.Button>
+        <css.LinkButton to="/">Return to Registration</css.LinkButton>
       </css.SuccessContainer>
     );
   }
@@ -52,13 +52,13 @@ function RegistrationSuccess() {
       <css.SuccessIcon>✓</css.SuccessIcon>
       <css.Title>Registration Complete!</css.Title>
       <css.Message>
-        Thank you for registering for our summer camp program. Please save your
+        Thank you for registering for our STEM camp program. Please save your
         registration ID for future reference.
       </css.Message>
 
       <css.RegistrationDetails>
         <css.Section>
-          <SectionTitle>Registration Information</SectionTitle>
+          <css.Title>Registration Information</css.Title>
           <p>
             <strong>Registration ID:</strong> {registration.id}
           </p>
@@ -69,7 +69,7 @@ function RegistrationSuccess() {
         </css.Section>
 
         <css.Section>
-          <css.SectionTitle>Parent/Guardian Information</css.SectionTitle>
+          <css.Title>Parent/Guardian Information</css.Title>
           <p>
             <strong>Name:</strong> {registration.parentInfo.name}
           </p>
@@ -82,7 +82,7 @@ function RegistrationSuccess() {
         </css.Section>
 
         <css.Section>
-          <css.SectionTitle>Student Information</css.SectionTitle>
+          <css.Title>Student Information</css.Title>
           <css.StudentList>
             {registration.students.map((student, index) => (
               <css.StudentItem key={index}>
@@ -104,19 +104,17 @@ function RegistrationSuccess() {
 
                 <p>
                   <strong>Classes:</strong>
+                    {student.classNames.map((className, idx) => (
+                        <css.ClassItem key={idx}>{className}</css.ClassItem>
+                    ))}
                 </p>
-                <css.ClassList>
-                  {student.classSelections.map((classId, idx) => (
-                    <ClassItem key={idx}>Class {classId}</ClassItem>
-                  ))}
-                </css.ClassList>
               </css.StudentItem>
             ))}
           </css.StudentList>
         </css.Section>
       </css.RegistrationDetails>
 
-      <css.Button to="/">Register Another Student</css.Button>
+          <css.LinkButton to="/">Register Another Student</css.LinkButton>
     </css.SuccessContainer>
   );
 }

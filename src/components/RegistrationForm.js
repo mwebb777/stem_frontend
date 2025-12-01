@@ -150,7 +150,7 @@ function RegistrationForm() {
 
             <form onSubmit={handleSubmit}>
                 <css.Section>
-                    <css.SectionTitle>Parent/Guardian Information</css.SectionTitle>
+                    <css.Title>Parent/Guardian Information</css.Title>
                     <css.FormField>
                         <css.Label htmlFor="parentName">Full Name</css.Label>
                         <css.Input
@@ -225,7 +225,7 @@ function RegistrationForm() {
 
 
                 <css.Section>
-                    <css.SectionTitle>Waiver 1</css.SectionTitle>
+                    <css.Title>Waiver 1</css.Title>
                     <css.ListContainer>
                         <p>
                         This is waiver one.
@@ -233,17 +233,17 @@ function RegistrationForm() {
                     </css.ListContainer>
                 </css.Section>
 
-                <cs.Section>
-                    <css.SectionTitle>Waiver 2</css.SectionTitle>
+                <css.Section>
+                    <css.Title>Waiver 2</css.Title>
                     <css.ListContainer>
                         <p>
                             This is waiver two.
                         </p>
                     </css.ListContainer>
-                </cs.Section>
+                </css.Section>
 
                 <css.Section>
-                    <css.SectionTitle>Waiver 3</css.SectionTitle>
+                    <css.Title>Waiver 3</css.Title>
                     <css.ListContainer>
                         <p>
                             This is waiver three.

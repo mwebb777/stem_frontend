@@ -46,7 +46,7 @@ function AdminDashboard() {
 
     return (
         <css.DashboardContainer>
-            <css.Title>Staff Dashboard</css.Title>
+            <css.FormTitle>Staff Dashboard</css.FormTitle>
 
             <css.TabsContainer>
                 <css.Tab
@@ -68,7 +68,7 @@ function AdminDashboard() {
                     Volunteers
                 </css.Tab>
                 <css.Tab
-                    active={activeTab === "repoerts"}
+                    active={activeTab === "reports"}
                     onClick={() => setActiveTab("reports")}
                 >
                     Reports

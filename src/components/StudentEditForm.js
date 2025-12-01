@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import css from "../styles.js"
 
 const StudentFormContainer = styled.div`
   background: #f8f9fa;
@@ -282,13 +283,13 @@ function StudentEditForm({
         <StudentFormContainer>
             <StudentHeader>
                 <StudentTitle>Student Information</StudentTitle>
-                <DarkButton
+                <css.DarkButton
                     onClick={onRemove}
                     disabled={isRemoveDisabled}
                     type="button"
                 >
                     Remove
-                </DarkButton>
+                </css.DarkButton>
             </StudentHeader>
 
             <FormRow>

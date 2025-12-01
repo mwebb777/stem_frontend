@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import css from "../styles.js"
 
 import StudentInfoForm from "./StudentInfoForm";
 import StudentScheduleForm from "./StudentScheduleForm";
@@ -334,23 +335,23 @@ function ReportDashboard() {
                     </p>
                     <Title>Exports</Title>
 
-                    <button onClick={handleStudentExport}>
+                    <css.DarkButton onClick={handleStudentExport}>
                         Export Students CSV
-                    </button>
+                    </css.DarkButton>
 
                     <br></br>
                     <br></br>
 
-                    <button onClick={handleVolunteerExport}>
+                    <css.DarkButton onClick={handleVolunteerExport}>
                         Export Volunteers CSV
-                    </button>
+                    </css.DarkButton>
 
                     <br></br>
                     <br></br>
 
-                    <button onClick={handleParentsExport}>
+                    <css.DarkButton onClick={handleParentsExport}>
                         Export Parents CSV
-                    </button>
+                    </css.DarkButton>
 
                 </p>
             )}

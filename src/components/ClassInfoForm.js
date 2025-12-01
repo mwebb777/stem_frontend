@@ -77,8 +77,8 @@ function ClassInfoForm({
                 <css.Text>{cls.description}</css.Text>
             </css.FormRow>
             <css.FormRow>
-                <Label>Instructor: </Label>
-                <Text>{cls.instructor}</Text>
+                <css.Label>Instructor: </css.Label>
+                <css.Text>{cls.instructor}</css.Text>
             </css.FormRow>
         </css.FormContainer>
     );

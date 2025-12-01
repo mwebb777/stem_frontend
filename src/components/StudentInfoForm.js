@@ -313,6 +313,18 @@ function StudentInfoForm({
 
             </FormRow>
 
+            <FormRow>
+                <Label>Class 1: </Label>
+                <Text>{student.classNames[0]}</Text>
+            </FormRow>
+            <FormRow>
+                <Label>Class 2: </Label>
+                <Text>{student.classNames[1]}</Text>
+            </FormRow>
+            <FormRow>
+                <Label>Class 3: </Label>
+                <Text>{student.classNames[2]}</Text>
+            </FormRow>
             <FormRow>                
                 <Label>Full Name: </Label>
                 <Text>{student.name}</Text>

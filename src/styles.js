@@ -1,7 +1,64 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default {
+
+    HeaderContainer: styled.header`
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    `,
+
+    FooterContainer: styled.footer`
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      margin-top: auto;
+    `,
+
+
+    Button:  styled.button`
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: "white";
+      border: none;
+      border-radius: 4px;
+      font-size: 1.0rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: ${(props) => (props.primary ? "#2980b9" : "#dfe6e9")};
+      }
+
+      &:disabled {
+        background: #bdc3c7;
+        cursor: not-allowed;
+      }
+    `,
+
+    SubmitButton: styled.button`
+      padding: 0.75rem 1.5rem;
+      background: #27ae60;
+      color: "white";
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #2ecc71;
+      }
+
+      &:disabled {
+        background: #bdc3c7;
+      }
+    `,
+
 
     DashboardContainer: styled.div`
       background: white;
@@ -23,7 +80,11 @@ export default {
       gap: 1rem;
     `,
 
-    SuccessContainer = styled.div`
+    StudentList: styled.div`
+      margin-top: 1rem;
+    `,
+
+    SuccessContainer: styled.div`
       background: white;
       padding: 2rem;
       border-radius: 8px;
@@ -31,26 +92,26 @@ export default {
       text-align: center;
     `,
 
-    SuccessIcon = styled.div`
+    SuccessIcon: styled.div`
       color: #27ae60;
       font-size: 4rem;
       margin-bottom: 1rem;
     `,
 
-    ButtonContainer = styled.div`
+    ButtonContainer: styled.div`
       display: flex;
       gap: 1rem;
       margin-top: 1rem;
     `,
 
-    SuccessIcon = styled.div`
+    SuccessIcon: styled.div`
       color: #27ae60;
       font-size: 4rem;
       margin-bottom: 1rem;
     `,
 
 
-    RegistrationDetails = styled.div`
+    RegistrationDetails: styled.div`
       max-width: 600px;
       margin: 0 auto;
       text-align: left;
@@ -59,7 +120,7 @@ export default {
       border-radius: 6px;
     `,
 
-    RegistrationItem = styled.div`
+    RegistrationItem: styled.div`
       border: 1px solid #ddd;
       border-radius: 6px;
       padding: 1.5rem;
@@ -67,7 +128,7 @@ export default {
       background: #f8f9fa;
     `,
 
-    RegistrationHeader = styled.div`
+    RegistrationHeader: styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -76,37 +137,33 @@ export default {
       border-bottom: 1px solid #ddd;
     `,
 
-    RegistrationId = styled.div`
+    RegistrationId: styled.div`
       font-weight: bold;
       color: #3498db;
     `,
 
-    RegistrationDate = styled.div`
+    RegistrationDate: styled.div`
       color: #7f8c8d;
       font-size: 0.9rem;
     `,
 
-    ParentInfo = styled.div`
+    ParentInfo: styled.div`
       margin-bottom: 1rem;
     `,
 
-    StudentsContainer = styled.div`
+    StudentItem: styled.div`
+      padding: 1rem;
+      background: white;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    `,
+
+    StudentsContainer: styled.div`
       margin-top: 1rem;
     `,
 
-    SubmitButton = styled(Button)`
-      background: #27ae60;
-
-      &:hover {
-        background: #2ecc71;
-      }
-
-      &:disabled {
-        background: #bdc3c7;
-      }
-    `,
-
-    ErrorMessage = styled.div`
+    ErrorMessage: styled.div`
       color: #e74c3c;
       padding: 0.75rem;
       background: #fadbd8;
@@ -114,25 +171,25 @@ export default {
       margin-bottom: 1rem;
     `,
 
-    Message = styled.p`
+    Message: styled.p`
       font-size: 1.1rem;
       margin-bottom: 2rem;
     `,
 
     FormContainer: styled.div`
-      background: #f8f9fa;
-      border-radius: 6px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid #3498db;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     `,
 
-    FooterContent = styled.div`
+
+    FooterContent: styled.div`
       max-width: 1200px;
       margin: 0 auto;
     `,
 
-    Header: styled.div`
+    TextHeader: styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -212,13 +269,14 @@ export default {
 
 
     DarkButton: styled.button`
-      background: #e74c3c;
-      color: white;
+      background: #bdc3c7;
+      color: black;
       border: none;
       border-radius: 4px;
       padding: 0.5rem 0.75rem;
-      font-size: 0.875rem;
+      font-size: 1rem;
       cursor: pointer;
+      transition: background 0.2s;
 
       &:hover {
         background: #c0392b;
@@ -228,6 +286,13 @@ export default {
         background: #bdc3c7;
         cursor: not-allowed;
       }
+    `,
+
+
+    FormTitle: styled.h1`
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      text-align: center;
     `,
 
     FormRow: styled.div`
@@ -285,10 +350,16 @@ export default {
       }
     `,
 
-    StudentName = styled.h4`
+    StudentName: styled.h4`
       color: #2c3e50;
       margin: 0 0 0.5rem;
     `,
+
+    Section: styled.div`
+      margin-top: 1.5rem;
+    `,
+
+
     ClassesSection: styled.div`
       margin-top: 1.5rem;
     `,
@@ -298,6 +369,11 @@ export default {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
       margin-top: 0.5rem;
+    `,
+
+    ClassItem: styled.li`
+      padding: 0.25rem 0;
+      margin-left: 2.5rem;
     `,
 
     ClassCard: styled.div`
@@ -323,7 +399,7 @@ export default {
       `}
     `,
 
-    Nav = styled.nav`
+    Nav: styled.nav`
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -331,7 +407,7 @@ export default {
       margin: 0 auto;
     `,
 
-    Logo = styled(Link)`
+    Logo: styled(Link)`
       font-size: 1.5rem;
       font-weight: bold;
       color: white;
@@ -342,18 +418,32 @@ export default {
       }
     `,
 
-    NavLinks = styled.div`
+    NavLinks: styled.div`
       display: flex;
       gap: 20px;
     `,
 
-    NavLink = styled(Link)`
+    NavLink: styled(Link)`
       color: white;
       text-decoration: none;
 
       &:hover {
         color: #ecf0f1;
         text-decoration: underline;
+      }
+    `,
+
+    LinkButton: styled(Link)`
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 1rem;
+
+      &:hover {
+        background: #2980b9;
       }
     `,
 
@@ -381,24 +471,5 @@ export default {
                 props.complete ? "#27ae60" : props.tooMany ? "#e74c3c" : "#7f8c8d"};
     `,
 
-    Button: styled.button`
-      padding: 0.75rem 1.5rem;
-      background: white;
-      color: black;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-
-      &:hover {
-        background: ${(props) => (props.primary ? "#2980b9" : "#dfe6e9")};
-      }
-
-      &:disabled {
-        background: #bdc3c7;
-        cursor: not-allowed;
-      }
-    `,
 
 }

@@ -60,33 +60,33 @@ function ReportAllergiesForm() {
     }
 
     return (
-        <FormContainer>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableHeader>Student</TableHeader>
-                        <TableHeader>Allergies</TableHeader>
-                    </TableRow>
-                </TableHead>
+        <css.ListContainer>
+            <css.Table>
+                <css.TableHead>
+                    <css.TableRow>
+                        <css.TableHeader>Student</css.TableHeader>
+                        <css.TableHeader>Allergies</css.TableHeader>
+                    </css.TableRow>
+                </css.TableHead>
                 <tbody>
                     {filteredUsers.map((student) => (
 
                             student.allergies != 'none' ? 
-                                <TableRow key={student.id}>
-                                    <TableCell>
+                                <css.TableRow key={student.id}>
+                                    <css.TableCell>
                                         {student.name}
-                                    </TableCell>
-                                    <TableCell>
+                                    </css.TableCell>
+                                    <css.TableCell>
                                         {student.allergies}
-                                    </TableCell>
+                                    </css.TableCell>
 
-                            </TableRow>
+                            </css.TableRow>
                             : null
                     ))}
                 </tbody>
-            </Table>
+            </css.Table>
 
-        </FormContainer>
+        </css.ListContainer>
     );
 }
 

@@ -11,9 +11,9 @@ function Header() {
             </css.Nav>
             <css.Nav>
                 <css.NavLinks>
-                    <css.NavLink to="/login">Login</css.NavLink>
                     <css.NavLink to="/">Register</css.NavLink>
                     <css.NavLink to="/volunteer_registration">Volunteer</css.NavLink>
+                    <css.NavLink to="/login">Login</css.NavLink>
                     <css.NavLink to="/admin">Admin</css.NavLink>
                 </css.NavLinks>
             </css.Nav>

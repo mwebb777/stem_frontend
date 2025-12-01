@@ -110,6 +110,9 @@ function ClassSessionList(
             <p>
                 <css.Label>{cls.name} - Session {sessionId}</css.Label>
                 <p>No registrations found.</p>
+                <br></br>
+                <br></br>
+                <br></br>
             </p>
         );
     }
@@ -126,6 +129,7 @@ function ClassSessionList(
                         <css.TableRow>
                             <css.TableHeader>Name</css.TableHeader>
                             <css.TableHeader>Status</css.TableHeader>
+                            <css.TableHeader></css.TableHeader>
                         </css.TableRow>
                     </css.TableHead>
                 <tbody>
@@ -137,7 +141,7 @@ function ClassSessionList(
                                 </css.TableCell>
 
                                 <css.TableCell>
-                                    <Text>{checkinStatus}</Text>
+                                    <css.Text>{checkinStatus}</css.Text>
                                 </css.TableCell>
 
                                 <css.TableCell>
@@ -155,7 +159,10 @@ function ClassSessionList(
                         ))
                     }
                     </tbody>
-            </css.Table>
+           </css.Table>
+           <br></br>
+           <br></br>
+           <br></br>
          </p>
     );
 }

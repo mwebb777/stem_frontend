@@ -205,6 +205,7 @@ function ClassDashboard() {
                             sessionId="3"
                             enrolled={cls.enrolled_session3}
                         />
+
                     ))}
                 </p>
             )}
