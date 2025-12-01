@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-import styles from "../styles.js"
+import css from "../styles.js"
 
 import ClassInfoForm from "./ClassInfoForm";
 import ClassSessionList from "./ClassSessionList";
@@ -56,95 +56,95 @@ function ClassDashboard() {
         setActiveClass(classes[0])
 
     return (
-        <styles.DashboardContainer>
+        <css.DashboardContainer>
 
-            <styles.TabsContainer>
-                <styles.Tab
+            <css.TabsContainer>
+                <css.Tab
                     active={activeTab === "list"}
                     onClick={() => setActiveTab("list")}
                 >
                     List
-                </styles.Tab>
-                <styles.Tab
+                </css.Tab>
+                <css.Tab
                     active={activeTab === "info"}
                     onClick={() => setActiveTab("info")}
                 >
                     Info
-                </styles.Tab>
-                <styles.Tab
+                </css.Tab>
+                <css.Tab
                     active={activeTab === "session1"}
                     onClick={() => setActiveTab("session1")}
                 >
                     Session 1
-                </styles.Tab>
-                <styles.Tab
+                </css.Tab>
+                <css.Tab
                     active={activeTab === "session2"}
                     onClick={() => setActiveTab("session2")}
                 >
                     Session 2
-                </styles.Tab>
-                <styles.Tab
+                </css.Tab>
+                <css.Tab
                     active={activeTab === "session3"}
                     onClick={() => setActiveTab("session3")}
                 >
                     Session 3
-                </styles.Tab>
-            </styles.TabsContainer>
+                </css.Tab>
+            </css.TabsContainer>
 
             {activeTab === "list" && (
-                <styles.Table>
-                    <styles.TableHead>
-                        <styles.TableRow>
-                            <styles.TableHeader>Name</styles.TableHeader>
-                            <styles.TableHeader>Session 1</styles.TableHeader>
-                            <styles.TableHeader>Session 2</styles.TableHeader>
-                            <styles.TableHeader>Session 3</styles.TableHeader>
-                        </styles.TableRow>
-                    </styles.TableHead>
+                <css.Table>
+                    <css.TableHead>
+                        <css.TableRow>
+                            <css.TableHeader>Name</css.TableHeader>
+                            <css.TableHeader>Session 1</css.TableHeader>
+                            <css.TableHeader>Session 2</css.TableHeader>
+                            <css.TableHeader>Session 3</css.TableHeader>
+                        </css.TableRow>
+                    </css.TableHead>
                     <tbody>
                         {classes.map((cls) => (
-                            <styles.TableRow key={cls.id}>
-                                <styles.TableCell>
-                                    <styles.Button type="button" onClick={() => {
+                            <css.TableRow key={cls.id}>
+                                <css.TableCell>
+                                    <css.Button type="button" onClick={() => {
                                         setActiveClass(cls)
                                         setActiveTab("info")
                                     }
                                     }>
                                         {cls.name}
-                                    </styles.Button>
-                                </styles.TableCell>
+                                    </css.Button>
+                                </css.TableCell>
 
-                                <styles.TableCell>
-                                    <styles.Button type="button" onClick={() => {
+                                <css.TableCell>
+                                    <css.Button type="button" onClick={() => {
                                         setActiveClass(cls)
                                         setActiveTab("session1")
                                     }
                                     }>
                                         {cls.enrolled_session1}/{cls.capacity}
-                                    </styles.Button>
-                                </styles.TableCell>
-                                <styles.TableCell>
-                                    <styles.Button type="button" onClick={() => {
+                                    </css.Button>
+                                </css.TableCell>
+                                <css.TableCell>
+                                    <css.Button type="button" onClick={() => {
                                         setActiveClass(cls)
                                         setActiveTab("session2")
                                     }
                                     }>
                                         {cls.enrolled_session2}/{cls.capacity}
-                                    </styles.Button>
-                                </styles.TableCell>
-                                <styles.TableCell>
-                                    <styles.Button type="button" onClick={() => {
+                                    </css.Button>
+                                </css.TableCell>
+                                <css.TableCell>
+                                    <css.Button type="button" onClick={() => {
                                         setActiveClass(cls)
                                         setActiveTab("session3")
                                     }
                                     }>
                                         {cls.enrolled_session3}/{cls.capacity}
-                                    </styles.Button>
-                                </styles.TableCell>
-                            </styles.TableRow>
+                                    </css.Button>
+                                </css.TableCell>
+                            </css.TableRow>
                         ))}
                     </tbody>
-                </styles.Table>
+                </css.Table>
             )}
 
             {activeTab === "info" && (
@@ -208,7 +208,7 @@ function ClassDashboard() {
                     ))}
                 </p>
             )}
-        </styles.DashboardContainer>
+        </css.DashboardContainer>
     );
 }
 

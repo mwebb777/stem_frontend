@@ -207,13 +207,13 @@ function StudentScheduleForm({
         <StudentFormContainer>
             <StudentHeader>
                 <StudentTitle>Student Information</StudentTitle>
-                <RemoveButton
+                <DarkButton
                     onClick={onRemove}
                     disabled={isRemoveDisabled}
                     type="button"
                 >
                     Remove
-                </RemoveButton>
+                </DarkButton>
             </StudentHeader>
 
             <FormRow>

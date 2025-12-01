@@ -1,29 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-
-const FooterContainer = styled.footer`
-  background-color: #2c3e50;
-  color: white;
-  padding: 1rem 2rem;
-  text-align: center;
-  margin-top: auto;
-`;
-
-const FooterContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-`;
+import css from "../styles.js"
 
 function Footer() {
   return (
-    <FooterContainer>
-      <FooterContent>
+    <css.FooterContainer>
+      <css.FooterContent>
         <p>
-          &copy; {new Date().getFullYear()} STEM Registration. All rights
-          reserved.
+          &copy; {new Date().getFullYear()} SOMD STEM Registration. All rights reserved.
         </p>
-      </FooterContent>
-    </FooterContainer>
+      </css.FooterContent>
+    </css.FooterContainer>
   );
 }
 

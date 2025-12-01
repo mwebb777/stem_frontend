@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import css from "../styles.js"
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 

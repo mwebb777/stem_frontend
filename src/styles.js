@@ -23,12 +23,43 @@ export default {
       gap: 1rem;
     `,
 
+    ButtonContainer = styled.div`
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    `,
+
+    SubmitButton = styled(Button)`
+      background: #27ae60;
+
+      &:hover {
+        background: #2ecc71;
+      }
+
+      &:disabled {
+        background: #bdc3c7;
+      }
+    `,
+
+    ErrorMessage = styled.div`
+      color: #e74c3c;
+      padding: 0.75rem;
+      background: #fadbd8;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    `,
+
     FormContainer: styled.div`
       background: #f8f9fa;
       border-radius: 6px;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       border-left: 4px solid #3498db;
+    `,
+
+    FooterContent = styled.div`
+      max-width: 1200px;
+      margin: 0 auto;
     `,
 
     Header: styled.div`
@@ -110,7 +141,7 @@ export default {
     `,
 
 
-    RemoveButton: styled.button`
+    DarkButton: styled.button`
       background: #e74c3c;
       color: white;
       border: none;
@@ -216,6 +247,40 @@ export default {
         cursor: not-allowed;
         background: #f1f2f6;
       `}
+    `,
+
+    Nav = styled.nav`
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    `,
+
+    Logo = styled(Link)`
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: #ecf0f1;
+      }
+    `,
+
+    NavLinks = styled.div`
+      display: flex;
+      gap: 20px;
+    `,
+
+    NavLink = styled(Link)`
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: #ecf0f1;
+        text-decoration: underline;
+      }
     `,
 
     ClassName: styled.h4`
