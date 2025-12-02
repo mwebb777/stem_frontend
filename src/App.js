@@ -12,6 +12,8 @@ import RegistrationList from "./components/RegistrationList";
 import AdminDashboard from "./components/AdminDashboard";
 import VolunteerRegistrationForm from "./components/VolunteerRegistrationForm";
 
+import RoleContextProvider from "./context/RoleContext";
+
 const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -30,19 +32,19 @@ function App() {
     return (
         <Router>
             <AppContainer>
-                <Header />
-                <MainContent>
-                    <Routes>
-                        <Route path="/" element={<RegistrationForm />} />
-                        <Route path="/success/:id" element={<RegistrationSuccess />} />
-                        <Route path="/volunteer_success/:id" element={<VolunteerRegistrationSuccess />} />
-                        <Route path="/admin" element={<AdminDashboard />} />
-                        <Route path="/registrations" element={<RegistrationList />} />
-                        <Route path="/volunteer_registration" element={<VolunteerRegistrationForm/> }/>
-                        <Route path="/login" element={<Login />} />
-                    </Routes>
-                </MainContent>
-                <Footer />
+                    <Header />
+                    <MainContent>
+                        <Routes>
+                            <Route path="/" element={<RegistrationForm />} />
+                            <Route path="/success/:id" element={<RegistrationSuccess />} />
+                            <Route path="/volunteer_success/:id" element={<VolunteerRegistrationSuccess />} />
+                            <Route path="/admin" element={<AdminDashboard />} />
+                            <Route path="/registrations" element={<RegistrationList />} />
+                            <Route path="/volunteer_registration" element={<VolunteerRegistrationForm/> }/>
+                            <Route path="/login" element={<Login />} />
+                        </Routes>
+                    </MainContent>
+                    <Footer />
             </AppContainer>
         </Router>
     );

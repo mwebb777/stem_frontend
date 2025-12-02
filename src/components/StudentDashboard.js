@@ -5,7 +5,6 @@ import axios from "axios";
 import styles from "../styles.js"
 
 import StudentInfoForm from "./StudentInfoForm";
-import StudentScheduleForm from "./StudentScheduleForm";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 

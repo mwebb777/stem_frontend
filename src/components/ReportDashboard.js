@@ -4,7 +4,6 @@ import axios from "axios";
 import css from "../styles.js"
 
 import StudentInfoForm from "./StudentInfoForm";
-import StudentScheduleForm from "./StudentScheduleForm";
 import ReportAllergiesForm from "./ReportAllergiesForm";
 import ReportMedicalForm from "./ReportMedicalForm";
 

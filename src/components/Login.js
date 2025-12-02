@@ -4,6 +4,8 @@ import styled from "styled-components";
 import axios from "axios";
 import css from "../styles.js"
 
+import RoleContext from '../context/RoleContext.js'
+
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function Login() {
@@ -11,6 +13,8 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState(null);
+
+    const { roleProvider } = useContext(RoleContext)
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -25,7 +29,8 @@ export default function Login() {
 
             setMessage(response.data.message)
             if (response.data.success) {
-                navigate('/register');
+                roleProvider.setUserRole('admin');
+                navigate('/admin');
             }
         } catch (err) {
             setError(

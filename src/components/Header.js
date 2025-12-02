@@ -1,9 +1,14 @@
-import React from "react";
+import React, { Fragment, useState, useContext } from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import css from "../styles.js"
 
+import RoleContext from '../context/RoleContext.js'
+
 function Header() {
+    const { roleProvider } = useContext(RoleContext)
+
+
     return (
         <css.HeaderContainer>
             <css.Nav>
@@ -14,7 +19,8 @@ function Header() {
                     <css.NavLink to="/">Register</css.NavLink>
                     <css.NavLink to="/volunteer_registration">Volunteer</css.NavLink>
                     <css.NavLink to="/login">Login</css.NavLink>
-                    <css.NavLink to="/admin">Admin</css.NavLink>
+
+                    {roleProvider.userRole == 'admin' && <css.NavLink to="/admin">Admin</css.NavLink>}
                 </css.NavLinks>
             </css.Nav>
         </css.HeaderContainer>

@@ -2,107 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import css from "../styles.js"
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
-const FormContainer = styled.div`
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const FormTitle = styled.h1`
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  text-align: center;
-`;
-
-const Section = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const SectionTitle = styled.h2`
-  color: #34495e;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #ecf0f1;
-`;
-
-const FormField = styled.div`
-  margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-
-  &:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-  }
-`;
-
-const StudentsContainer = styled.div`
-  margin-top: 1rem;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-`;
-
-const Button = styled.button`
-  padding: 0.75rem 1.5rem;
-  background: ${(props) => (props.primary ? "#3498db" : "#ecf0f1")};
-  color: ${(props) => (props.primary ? "white" : "#34495e")};
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-
-  &:hover {
-    background: ${(props) => (props.primary ? "#2980b9" : "#dfe6e9")};
-  }
-
-  &:disabled {
-    background: #bdc3c7;
-    cursor: not-allowed;
-  }
-`;
-
-const SubmitButton = styled(Button)`
-  background: #27ae60;
-
-  &:hover {
-    background: #2ecc71;
-  }
-
-  &:disabled {
-    background: #bdc3c7;
-  }
-`;
-
-const ErrorMessage = styled.div`
-  color: #e74c3c;
-  padding: 0.75rem;
-  background: #fadbd8;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-`;
 
 function VolunteerRegistrationForm() {
     const [classes, setClasses] = useState([]);
@@ -176,27 +79,27 @@ function VolunteerRegistrationForm() {
     }
 
     return (
-        <FormContainer>
-            <FormTitle>STEM 2026 Volunteer Registration</FormTitle>
+        <css.FormContainer>
+            <css.FormTitle>STEM 2026 Volunteer Registration</css.FormTitle>
 
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {error && <css.ErrorMessage>{error}</css.ErrorMessage>}
 
             <form onSubmit={handleSubmit}>
-                <Section>
-                    <SectionTitle>Volunteer Information</SectionTitle>
-                    <FormField>
-                        <Label htmlFor="volunteerName">Full Name</Label>
-                        <Input
+                <css.Section>
+                    <css.Title>Volunteer Information</css.Title>
+                    <css.FormField>
+                        <css.Label htmlFor="volunteerName">Full Name</css.Label>
+                        <css.Input
                             id="volunteerName"
                             name="name"
                             value={volunteerInfo.name}
                             onChange={handleInfoChange}
                             required
                         />
-                    </FormField>
-                    <FormField>
-                        <Label htmlFor="volunteerEmail">Email</Label>
-                        <Input
+                    </css.FormField>
+                    <css.FormField>
+                        <css.Label htmlFor="volunteerEmail">Email</css.Label>
+                        <css.Input
                             id="volunteerEmail"
                             name="email"
                             type="email"
@@ -204,22 +107,22 @@ function VolunteerRegistrationForm() {
                             onChange={handleInfoChange}
                             required
                         />
-                    </FormField>
+                    </css.FormField>
 
-                    <FormField>
-                        <Label htmlFor="password">Password</Label>
-                        <Input
+                    <css.FormField>
+                        <css.Label htmlFor="password">Password</css.Label>
+                        <css.Input
                             id="password"
                             name="password"
                             value={volunteerInfo.password}
                             onChange={handleInfoChange}
                             required
                         />
-                    </FormField>
+                    </css.FormField>
 
-                    <FormField>
-                        <Label htmlFor="volunteerPhone">Phone Number</Label>
-                        <Input
+                    <css.FormField>
+                        <css.Label htmlFor="volunteerPhone">Phone Number</css.Label>
+                        <css.Input
                             id="volunteerPhone"
                             name="phone"
                             type="tel"
@@ -227,11 +130,11 @@ function VolunteerRegistrationForm() {
                             onChange={handleInfoChange}
                             required
                         />
-                    </FormField>
-                </Section>
+                    </css.FormField>
+                </css.Section>
 
-                <FormField>
-                    <Label htmlFor="volunteerShirt">Shirt Size</Label>
+                <css.FormField>
+                    <css.Label htmlFor="volunteerShirt">Shirt Size</css.Label>
                     {
                         <select
                             name="shirt"
@@ -246,13 +149,13 @@ function VolunteerRegistrationForm() {
                             ))}
                         </select>
                     }
-                </FormField>
+                </css.FormField>
 
-                <SubmitButton type="submit" disabled={!isFormValid()} primary>
+                <css.SubmitButton type="submit" disabled={!isFormValid()} primary>
                     Complete Registration
-                </SubmitButton>
+                </css.SubmitButton>
             </form>
-        </FormContainer>
+        </css.FormContainer>
     );
 }
 
