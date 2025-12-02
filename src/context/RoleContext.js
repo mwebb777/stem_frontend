@@ -1,17 +1,17 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useContext } from 'react';
 
-const RoleContext = createContext()
+// Create a Context
+const ThemeContext = createContext();
 
-const RoleContextProvider = (props) => {
-    const [userRole, setUserRole] = useState('user')
-
+// Create a Provider Component
+const ThemeProvider = ({ children }) => {
+    const [theme, setTheme] = useState('light');
+    const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
     return (
-        <RoleContext.Provider
-            value={{
-                userRole
-            }}>
-            {props.children}
-        </RoleContext.Provider>
-    )
-}
-export default RoleContextProvider
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            <div className={`app-theme-${theme}`}>{children}</div>
+        </ThemeContext.Provider>
+    );
+};
+
+export { ThemeProvider, ThemeContext }

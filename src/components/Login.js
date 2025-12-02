@@ -1,10 +1,10 @@
-﻿import React, { useState } from 'react';
+﻿import React, { createContext, useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import css from "../styles.js"
 
-import RoleContext from '../context/RoleContext.js'
+import { ThemeProvider, ThemeContext } from "../context/RoleContext";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -14,11 +14,13 @@ export default function Login() {
     const [message, setMessage] = useState('');
     const [error, setError] = useState(null);
 
-    const { roleProvider } = useContext(RoleContext)
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setMessage('');
+
+        global.userRole = 'admin';
+        console.log(global.userRole);
 
         try {
             setError(null);
@@ -29,7 +31,6 @@ export default function Login() {
 
             setMessage(response.data.message)
             if (response.data.success) {
-                roleProvider.setUserRole('admin');
                 navigate('/admin');
             }
         } catch (err) {
@@ -60,6 +61,7 @@ export default function Login() {
                     style={styles.input}
                 />
                 <button type="submit" style={styles.button}>Login</button>
+                <css.Text>{global.userRole}</css.Text>
             </form>
             <p>{message}</p>
         </div>

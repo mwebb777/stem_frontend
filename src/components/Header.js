@@ -3,10 +3,22 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import css from "../styles.js"
 
-import RoleContext from '../context/RoleContext.js'
+import { ThemeProvider, ThemeContext } from "../context/RoleContext";
+
+// Consume Context in a Component
+const ThemeSwitcher = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    return (
+        <button onClick={toggleTheme}>
+            Switch to {theme === 'light' ? 'dark' : 'light'} mode
+        </button>
+    );
+};
+
 
 function Header() {
-    const { roleProvider } = useContext(RoleContext)
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { userRole, setUserRole } = useState('user');
 
 
     return (
@@ -19,8 +31,8 @@ function Header() {
                     <css.NavLink to="/">Register</css.NavLink>
                     <css.NavLink to="/volunteer_registration">Volunteer</css.NavLink>
                     <css.NavLink to="/login">Login</css.NavLink>
-
-                    {roleProvider.userRole == 'admin' && <css.NavLink to="/admin">Admin</css.NavLink>}
+                    <css.Text>{global.userRole}</css.Text>
+                    {global.userRole === 'admin' && <css.NavLink to="/admin">Admin</css.NavLink>}
                 </css.NavLinks>
             </css.Nav>
         </css.HeaderContainer>

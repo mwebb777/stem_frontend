@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
@@ -12,7 +12,18 @@ import RegistrationList from "./components/RegistrationList";
 import AdminDashboard from "./components/AdminDashboard";
 import VolunteerRegistrationForm from "./components/VolunteerRegistrationForm";
 
-import RoleContextProvider from "./context/RoleContext";
+import { ThemeProvider, ThemeContext }  from "./context/RoleContext";
+
+// Consume Context in a Component
+const ThemeSwitcher = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    return (
+        <button onClick={global.userRole = 'staff'}>
+            Switch to {global.userRole === 'staff' ? 'admin' : 'light'} mode
+        </button>
+    );
+};
+
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -29,9 +40,13 @@ const MainContent = styled.main`
 `;
 
 function App() {
+    global.userRole = 'staff';
+
     return (
         <Router>
             <AppContainer>
+                <ThemeProvider>
+                    <ThemeSwitcher />
                     <Header />
                     <MainContent>
                         <Routes>
@@ -45,6 +60,7 @@ function App() {
                         </Routes>
                     </MainContent>
                     <Footer />
+                </ThemeProvider>
             </AppContainer>
         </Router>
     );
