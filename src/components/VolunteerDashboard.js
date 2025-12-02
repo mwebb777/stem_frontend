@@ -7,6 +7,13 @@ import VolunteerInfoForm from "./VolunteerInfoForm";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
+
+let activeVolunteer = "";
+
+const setActiveVolunteer = (volunteer) => {
+    activeVolunteer = volunteer;
+};
+
 function VolunteerDashboard() {
     const [activeTab, setActiveTab] = useState("list");
     const [volunteers, setVolunteers] = useState([]);
@@ -41,7 +48,7 @@ function VolunteerDashboard() {
     }
 
     if (activeVolunteer === '')
-        setVolunteerInfo(volunteers[0]);
+        setActiveVolunteer(volunteers[0]);
 
     return (
         <css.DashboardContainer>
@@ -73,16 +80,16 @@ function VolunteerDashboard() {
 
                  <css.Table>
                         <css.TableHead>
-                        <TableRow>
+                        <css.TableRow>
                                 <css.TableHeader>Name</css.TableHeader>
-                        </TableRow>
+                        </css.TableRow>
                     </css.TableHead>
                     <tbody>
                             {filteredUsers.map((vol) => (
                                 <css.TableRow key={vol.id}>
                                     <css.TableCell>
                                         <css.Button type="button" onClick={() => {
-                                        setVolunteerInfo(vol)
+                                        setActiveVolunteer(vol)
                                         setActiveTab("info")
                                         }
                                     }>

@@ -134,7 +134,6 @@ function StudentEditForm({
 
     return (
         <css.FormContainer>
-            <css.Header>
                 <css.Title>Student Information</css.Title>
                 <css.DarkButton
                     onClick={onRemove}
@@ -143,7 +142,6 @@ function StudentEditForm({
                 >
                     Remove
                 </css.DarkButton>
-            </css.Header>
 
             <css.FormRow>
                 <css.FormField>

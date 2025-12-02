@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react'
+import React, { Fragment, useState, useContext, useEffect } from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import css from "../styles.js"
@@ -19,7 +19,12 @@ const ThemeSwitcher = () => {
 function Header() {
     const { theme, toggleTheme } = useContext(ThemeContext);
     const { userRole, setUserRole } = useState('user');
+    const [message, setMessage] = useState('');
 
+
+    if (message != window.userRole) {
+        setMessage(window.userRole);
+    }
 
     return (
         <css.HeaderContainer>
@@ -31,8 +36,7 @@ function Header() {
                     <css.NavLink to="/">Register</css.NavLink>
                     <css.NavLink to="/volunteer_registration">Volunteer</css.NavLink>
                     <css.NavLink to="/login">Login</css.NavLink>
-                    <css.Text>{global.userRole}</css.Text>
-                    {global.userRole === 'admin' && <css.NavLink to="/admin">Admin</css.NavLink>}
+                    {message == 'admin' && <css.NavLink to="/admin">{message}</css.NavLink>}
                 </css.NavLinks>
             </css.Nav>
         </css.HeaderContainer>

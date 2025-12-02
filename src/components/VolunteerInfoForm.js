@@ -73,9 +73,9 @@ function VolunteerInfoForm({
 
     return (
         <css.FormContainer>
-            <css.Header>
-                <css.Title>Volunteer Information</css.Title>
-            </css.Header>
+            <css.Title>
+                <css.Title>Volunteer: {volunteer.name}</css.Title>
+            </css.Title>
 
             <css.FormRow>
 

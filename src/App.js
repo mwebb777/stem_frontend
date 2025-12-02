@@ -17,13 +17,17 @@ import { ThemeProvider, ThemeContext }  from "./context/RoleContext";
 // Consume Context in a Component
 const ThemeSwitcher = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
+
+    function handleClick() {
+        window.userRole = 'Staff';
+    }
+
     return (
-        <button onClick={global.userRole = 'staff'}>
-            Switch to {global.userRole === 'staff' ? 'admin' : 'light'} mode
+        <button onClick={handleClick}>
+        theme
         </button>
     );
 };
-
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -40,7 +44,8 @@ const MainContent = styled.main`
 `;
 
 function App() {
-    global.userRole = 'staff';
+    global.userRole = 'junkn';
+    window.userRole = 'staff';
 
     return (
         <Router>

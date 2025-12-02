@@ -149,6 +149,9 @@ function VolunteerRegistrationForm() {
                             ))}
                         </select>
                     }
+                    <br>
+                    </br>
+                    <br></br>
                 </css.FormField>
 
                 <css.SubmitButton type="submit" disabled={!isFormValid()} primary>

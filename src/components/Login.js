@@ -13,14 +13,13 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState(null);
-
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setMessage('');
 
-        global.userRole = 'admin';
-        console.log(global.userRole);
+        window.userRole = 'admin';
 
         try {
             setError(null);
@@ -37,6 +36,7 @@ export default function Login() {
             setError(
                 err.response?.data?.message || "Registration failed. Please try again.",
             );
+            setMessage(err.response?.data?.message);
         }
     };
 
@@ -61,8 +61,9 @@ export default function Login() {
                     style={styles.input}
                 />
                 <button type="submit" style={styles.button}>Login</button>
-                <css.Text>{global.userRole}</css.Text>
             </form>
+            <br></br>
+            <br></br>
             <p>{message}</p>
         </div>
     );

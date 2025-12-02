@@ -69,9 +69,9 @@ function StudentInfoForm({
 
     return (
         <css.FormContainer>
-            <css.Header>
-                <css.Title>Student Information</css.Title>
-            </css.Header>
+            <css.Title>
+                <css.Title>Student: {student.name}</css.Title>
+            </css.Title>
 
             <css.FormRow>
                 <css.Label>Status:</css.Label>
