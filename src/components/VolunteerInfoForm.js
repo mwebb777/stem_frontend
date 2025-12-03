@@ -90,24 +90,22 @@ function VolunteerInfoForm({
                 </css.DarkButton>
             </css.FormRow>
 
-
-            <css.FormRow>
-                <css.Label>Full Name: </css.Label>
-                <css.Text>{volunteer.name}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Email:</css.Label>
-                <css.Text>{volunteer.email}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Phone Number:</css.Label>
-                <css.Text>{volunteer.phone}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Shirt Size:</css.Label>
-                <css.Text>{volunteer.shirt}</css.Text>
-            </css.FormRow>
-
+            {window.userRole == 'Admin' &&
+                <css.Section>
+                    <css.FormRow>
+                        <css.Label>Email:</css.Label>
+                        <css.Text>{volunteer.email}</css.Text>
+                    </css.FormRow>
+                    <css.FormRow>
+                        <css.Label>Phone Number:</css.Label>
+                        <css.Text>{volunteer.phone}</css.Text>
+                    </css.FormRow>
+                    <css.FormRow>
+                        <css.Label>Shirt Size:</css.Label>
+                        <css.Text>{volunteer.shirt}</css.Text>
+                    </css.FormRow>
+                </css.Section>
+            }
         </css.FormContainer>
     );
 }

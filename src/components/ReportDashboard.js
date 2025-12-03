@@ -332,26 +332,30 @@ function ReportDashboard() {
                         <br></br>
                         <br></br>
                     </p>
-                    <Title>Exports</Title>
 
-                    <css.DarkButton onClick={handleStudentExport}>
-                        Export Students CSV
-                    </css.DarkButton>
+                    {window.userRole == 'Admin' && 
+                        <css.Section>
+                            <Title>Exports</Title>
 
-                    <br></br>
-                    <br></br>
+                            <css.DarkButton onClick={handleStudentExport}>
+                                Export Students CSV
+                            </css.DarkButton>
 
-                    <css.DarkButton onClick={handleVolunteerExport}>
-                        Export Volunteers CSV
-                    </css.DarkButton>
+                            <br></br>
+                            <br></br>
 
-                    <br></br>
-                    <br></br>
+                            <css.DarkButton onClick={handleVolunteerExport}>
+                                Export Volunteers CSV
+                            </css.DarkButton>
 
-                    <css.DarkButton onClick={handleParentsExport}>
-                        Export Parents CSV
-                    </css.DarkButton>
+                            <br></br>
+                            <br></br>
 
+                            <css.DarkButton onClick={handleParentsExport}>
+                                Export Parents CSV
+                            </css.DarkButton>
+                        </css.Section>
+                    }
                 </p>
             )}
 

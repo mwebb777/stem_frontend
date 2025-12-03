@@ -336,8 +336,8 @@ function StudentEditForm({
                 </css.ClassesList>
             </css.ClassesSection>
 
-
         </css.FormContainer>
+
     );
 }
 

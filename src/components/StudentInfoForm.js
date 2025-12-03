@@ -98,39 +98,39 @@ function StudentInfoForm({
                 <css.Label>Class 3: </css.Label>
                 <css.Text>{student.classNames[2]}</css.Text>
             </css.FormRow>
-            <css.FormRow>                
-                <css.Label>Full Name: </css.Label>
-                <css.Text>{student.name}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Age: </css.Label>
-                <css.Text>{student.age}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Email:</css.Label>
-                <css.Text>{student.email}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Phone Number:</css.Label>
-                <css.Text>{student.phone}</css.Text>
-            </css.FormRow>
             <css.FormRow>
                 <css.Label>Food Allergies:</css.Label>
                 <css.Text>{student.allergies}</css.Text>
-            </css.FormRow>
-            <css.FormRow>
-                <css.Label>Shirt Size:</css.Label>
-                <css.Text>{student.shirt}</css.Text>
             </css.FormRow>
             <css.FormRow>
                 <css.Label>Medical Notes:</css.Label>
                 <css.Text>{student.medicalNotes}</css.Text>
             </css.FormRow>
             <css.FormRow>
+                <css.Label>Shirt Size:</css.Label>
+                <css.Text>{student.shirt}</css.Text>
+            </css.FormRow>
+            <css.FormRow>
                 <css.Label>School:</css.Label>
                 <css.Text>{student.school}</css.Text>
             </css.FormRow>
 
+            {window.userRole == 'Admin' &&
+                <css.Section>
+                    <css.FormRow>
+                        <css.Label>Age: </css.Label>
+                        <css.Text>{student.age}</css.Text>
+                    </css.FormRow>
+                    <css.FormRow>
+                        <css.Label>Email:</css.Label>
+                        <css.Text>{student.email}</css.Text>
+                    </css.FormRow>
+                    <css.FormRow>
+                        <css.Label>Phone Number:</css.Label>
+                        <css.Text>{student.phone}</css.Text>
+                    </css.FormRow>
+                </css.Section>
+            }
         </css.FormContainer>
     );
 }

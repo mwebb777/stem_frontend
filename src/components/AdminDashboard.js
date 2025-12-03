@@ -46,7 +46,7 @@ function AdminDashboard() {
 
     return (
         <css.DashboardContainer>
-            <css.FormTitle>Staff Dashboard</css.FormTitle>
+            <css.FormTitle>{window.userRole} Dashboard</css.FormTitle>
 
             <css.TabsContainer>
                 <css.Tab

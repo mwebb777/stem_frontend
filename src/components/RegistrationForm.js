@@ -197,24 +197,23 @@ function RegistrationForm() {
                             required
                         />
                     </css.FormField>
-                </css.Section>
 
-                <css.Section>
-                    <css.Title>Student Information</css.Title>
-                    <css.ListContainer>
-                        {students.map((student) => (
-                            <StudentEditForm
-                                key={student.id}
-                                student={student}
-                                classes={classes}
-                                onChange={(updatedStudent) =>
-                                    handleStudentChange(student.id, updatedStudent)
-                                }
-                                onRemove={() => removeStudent(student.id)}
-                                isRemoveDisabled={students.length === 1}
-                            />
-                        ))}
-                    </css.ListContainer>
+                    <br></br>
+                    <br></br>
+
+                    {students.map((student) => (
+                        <StudentEditForm
+                            key={student.id}
+                            student={student}
+                            classes={classes}
+                            onChange={(updatedStudent) =>
+                                handleStudentChange(student.id, updatedStudent)
+                            }
+                            onRemove={() => removeStudent(student.id)}
+                            isRemoveDisabled={students.length === 1}
+                        />
+
+                    ))}
 
                     <css.ButtonContainer>
                         <css.DarkButton type="button" onClick={addStudent}>

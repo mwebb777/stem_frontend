@@ -7,7 +7,7 @@ function Footer() {
       <css.FooterContainer>
       <css.FooterContent>
         <p>
-          &copy; {new Date().getFullYear()} SOMD STEM Registration. All rights reserved.
+          &copy; 2026 SOMD STEM Registration. All rights reserved.
         </p>
       </css.FooterContent>
     </css.FooterContainer>

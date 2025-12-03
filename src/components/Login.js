@@ -19,8 +19,6 @@ export default function Login() {
         e.preventDefault();
         setMessage('');
 
-        window.userRole = 'admin';
-
         try {
             setError(null);
             const response = await axios.post(`${API_URL}/api/login`, {
@@ -30,6 +28,9 @@ export default function Login() {
 
             setMessage(response.data.message)
             if (response.data.success) {
+
+                window.userRole = response.data.volunteer.userRole;
+
                 navigate('/admin');
             }
         } catch (err) {
