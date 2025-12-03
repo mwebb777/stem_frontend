@@ -44,8 +44,7 @@ const MainContent = styled.main`
 `;
 
 function App() {
-    global.userRole = 'junkn';
-    window.userRole = 'staff';
+    window.userRole = 'Staff';
 
     return (
         <Router>
