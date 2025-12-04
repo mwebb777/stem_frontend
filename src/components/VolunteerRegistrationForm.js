@@ -12,6 +12,9 @@ function VolunteerRegistrationForm() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedShirt, setSelectedShirt] = useState("");
+    const [isWaiver1Checked, setWaiver1Checked] = useState(false);
+    const [isWaiver2Checked, setWaiver2Checked] = useState(false);
+    const [isWaiver3Checked, setWaiver3Checked] = useState(false);
     const navigate = useNavigate();
 
     const [volunteerInfo, setVolunteerInfo] = useState({
@@ -66,7 +69,8 @@ function VolunteerRegistrationForm() {
 
     const isFormValid = () => {
         if (!volunteerInfo.name || !volunteerInfo.email || !volunteerInfo.phone ||
-            !volunteerInfo.password || !volunteerInfo.shirt) {
+            !volunteerInfo.password || !volunteerInfo.shirt || 
+            !isWaiver1Checked || !isWaiver2Checked || !isWaiver3Checked) {
             return false;
         }
         return true;
@@ -153,6 +157,60 @@ function VolunteerRegistrationForm() {
                     </br>
                     <br></br>
                 </css.FormField>
+
+
+                <css.Section>
+                    <css.Title>Waiver 1</css.Title>
+                    <css.ListContainer>
+                        <p>
+                            This is waiver one.
+                        </p>
+                    </css.ListContainer>
+                </css.Section>
+
+                <css.Label> Accept Waiver 1: {'  '}
+                    <css.Input
+                        type="checkbox"
+                        checked={isWaiver1Checked}
+                        onChange={(e) => setWaiver1Checked(e.target.checked)}
+                    />
+                </css.Label>
+
+                <css.Section>
+                    <css.Title>Waiver 2</css.Title>
+                    <css.ListContainer>
+                        <p>
+                            This is waiver two.
+                        </p>
+                    </css.ListContainer>
+                </css.Section>
+
+                <css.Label> Accept Waiver 2: {'  '}
+                    <css.Input
+                        type="checkbox"
+                        checked={isWaiver2Checked}
+                        onChange={(e) => setWaiver2Checked(e.target.checked)}
+                    />
+                </css.Label>
+
+                <css.Section>
+                    <css.Title>Waiver 3</css.Title>
+                    <css.ListContainer>
+                        <p>
+                            This is waiver three.
+                        </p>
+                    </css.ListContainer>
+                </css.Section>
+
+                <css.Label> Accept Waiver 3: {'  '}
+                    <css.Input
+                        type="checkbox"
+                        checked={isWaiver3Checked}
+                        onChange={(e) => setWaiver3Checked(e.target.checked)}
+                    />
+                </css.Label>
+
+
 
                 <css.SubmitButton type="submit" disabled={!isFormValid()} primary>
                     Complete Registration

@@ -7,7 +7,6 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 
 
-
 let activeVolunteer = "";
 
 const setActiveVolunteer = (volunteer) => {

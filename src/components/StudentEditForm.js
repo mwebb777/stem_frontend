@@ -244,7 +244,7 @@ function StudentEditForm({
             </css.FormField>
 
             <css.ClassesSection>
-                <css.Label>Class Session 1 (Choose 1)</css.Label>
+                <css.Label>Workshop Session 1 (Choose 1)</css.Label>
                 <css.SelectionCount
                     complete={student.class1.length === 1}
                     tooMany={student.class1.length > 1}
@@ -275,7 +275,7 @@ function StudentEditForm({
             </css.ClassesSection>
 
             <css.ClassesSection>
-                <css.Label>Class Session 2 (Choose 1)</css.Label>
+                <css.Label>Workshop Session 2 (Choose 1)</css.Label>
                 <css.SelectionCount
                     complete={student.class2.length === 1}
                     tooMany={student.class2.length > 1}
@@ -306,7 +306,7 @@ function StudentEditForm({
             </css.ClassesSection>
 
             <css.ClassesSection>
-                <css.Label>Class Session 3 (Choose 1)</css.Label>
+                <css.Label>Workshop Session 3 (Choose 1)</css.Label>
                 <css.SelectionCount
                     complete={student.class3.length === 1}
                     tooMany={student.class3.length > 1}

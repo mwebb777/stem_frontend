@@ -61,7 +61,7 @@ function ClassInfoForm({
     return (
         <css.FormContainer>
             <css.Header>
-                <css.Title>Class Information</css.Title>
+                <css.Title>Workshop Information</css.Title>
             </css.Header>
 
             <css.FormRow>

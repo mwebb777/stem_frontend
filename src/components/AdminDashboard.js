@@ -53,7 +53,7 @@ function AdminDashboard() {
                     active={activeTab === "classes"}
                     onClick={() => setActiveTab("classes")}
                 >
-                    Classes
+                    Workshops
                 </css.Tab>
                 <css.Tab
                     active={activeTab === "students"}
