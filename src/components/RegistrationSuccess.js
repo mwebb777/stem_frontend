@@ -16,7 +16,8 @@ function RegistrationSuccess() {
     const fetchRegistration = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/registrations/${id}`);
-        if (response.data.success) {
+
+       if (response.data.success) {
           setRegistration(response.data.registration);
         } else {
           setError("Failed to load registration details.");
@@ -79,6 +80,12 @@ function RegistrationSuccess() {
           <p>
             <strong>Phone:</strong> {registration.parentInfo.phone}
           </p>
+            <p>
+                <strong>Alternate POC Name:</strong> {registration.parentInfo.alternateName}
+            </p>
+            <p>
+                <strong>Alternate POC Phone:</strong> {registration.parentInfo.alternatePhone}
+            </p>
         </css.Section>
 
         <css.Section>

@@ -89,6 +89,16 @@ function VolunteerInfoForm({
                 </css.DarkButton>
             </css.FormRow>
 
+             <css.FormRow>
+                <css.Label>Food Allergies:</css.Label>
+                <css.Text>{volunteer.allergies}</css.Text>
+            </css.FormRow>
+
+            <css.FormRow>
+                <css.Label>Medical Notes:</css.Label>
+                <css.Text>{volunteer.medicalNotes}</css.Text>
+            </css.FormRow>
+
             {window.userRole == 'Admin' &&
                 <css.Section>
                     <css.FormRow>
@@ -105,6 +115,7 @@ function VolunteerInfoForm({
                     </css.FormRow>
                 </css.Section>
             }
+
         </css.FormContainer>
     );
 }

@@ -21,8 +21,11 @@ function VolunteerRegistrationForm() {
         name: "",
         password: "",
         email: "",
+        allergies: "",
+        medicalNotes: "",
         phone: "",
         shirt: "",
+        job: "none",
     });
 
     useEffect(() => {
@@ -156,6 +159,29 @@ function VolunteerRegistrationForm() {
                     <br>
                     </br>
                     <br></br>
+                </css.FormField>
+
+                <css.FormField>
+                    <css.Label htmlFor={`allergies-${volunteerInfo.id}`}>Food Allergies</css.Label>
+                    <css.Input
+                        id={`allergies-${volunteerInfo.id}`}
+                        name="allergies"
+                        placeholder="List any food allergies, or type 'None'"
+                        value={volunteerInfo.allergies}
+                        onChange={handleInfoChange}
+                        required
+                    />
+                </css.FormField>
+
+                <css.FormField>
+                    <css.Label htmlFor={`medicalNotes-${volunteerInfo.id}`}>Medical Notes</css.Label>
+                    <css.TextArea
+                        id={`medicalNotes-${volunteerInfo.id}`}
+                        name="medicalNotes"
+                        placeholder="Any additional medical information we should know"
+                        value={volunteerInfo.medicalNotes}
+                        onChange={handleInfoChange}
+                    />
                 </css.FormField>
 
 

@@ -30,17 +30,20 @@ const setStudentInfo = (student) => {
 
 function ReportAllergiesForm() {
     const [students, setStudents] = useState([]);
+    const [volunteers, setVolunteers] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [studentsRes] = await Promise.all([
+                const [studentsRes, volunteerRes] = await Promise.all([
                     axios.get(`${API_URL}/api/students`),
+                    axios.get(`${API_URL}/api/volunteers`),
                 ]);
 
                 setStudents(studentsRes.data);
+                setVolunteers(volunteerRes.data);
                 setLoading(false);
             } catch (err) {
                 console.error("Failed to load data:", err);
@@ -53,6 +56,10 @@ function ReportAllergiesForm() {
 
     const filteredUsers = students.filter(user =>
         user.allergies.toLowerCase().length > 0
+    );
+
+    const filteredVolunteers = volunteers.filter(vol =>
+        vol.allergies.toLowerCase().length > 0
     );
 
     if (loading) {
@@ -79,6 +86,34 @@ function ReportAllergiesForm() {
                                     <css.TableCell>
                                         {student.allergies}
                                     </css.TableCell>
+
+                            </css.TableRow>
+                            : null
+                    ))}
+                </tbody>
+            </css.Table>
+
+            <br></br>
+            <br></br>
+
+            <css.Table>
+                <css.TableHead>
+                    <css.TableRow>
+                        <css.TableHeader>Volunteer</css.TableHeader>
+                        <css.TableHeader>Allergies</css.TableHeader>
+                    </css.TableRow>
+                </css.TableHead>
+                <tbody>
+                    {filteredVolunteers.map((volunteer) => (
+
+                        volunteer.allergies != 'none' ?
+                            <css.TableRow key={volunteer.id}>
+                                <css.TableCell>
+                                    {volunteer.name}
+                                </css.TableCell>
+                                <css.TableCell>
+                                    {volunteer.allergies}
+                                </css.TableCell>
 
                             </css.TableRow>
                             : null

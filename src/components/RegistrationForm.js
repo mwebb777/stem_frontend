@@ -24,6 +24,8 @@ function RegistrationForm() {
         password: "",
         email: "",
         phone: "",
+        alternateName: "",
+        alternatePhone: "",
     });
 
     const [students, setStudents] = useState([
@@ -195,6 +197,29 @@ function RegistrationForm() {
                             name="phone"
                             type="tel"
                             value={parentInfo.phone}
+                            onChange={handleParentInfoChange}
+                            required
+                        />
+                    </css.FormField>
+
+                    <css.FormField>
+                        <css.Label htmlFor="alternateName">Alternate POC Full Name</css.Label>
+                        <css.Input
+                            id="alternateName"
+                            name="alternateName"
+                            value={parentInfo.alternateName}
+                            onChange={handleParentInfoChange}
+                            required
+                        />
+                    </css.FormField>
+
+                    <css.FormField>
+                        <css.Label htmlFor="alternatePhone">Alternate POC Phone Number</css.Label>
+                        <css.Input
+                            id="alternatePhone"
+                            name="alternatePhone"
+                            type="tel"
+                            value={parentInfo.alternatePhone}
                             onChange={handleParentInfoChange}
                             required
                         />
