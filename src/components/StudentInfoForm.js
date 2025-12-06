@@ -129,6 +129,26 @@ function StudentInfoForm({
                         <css.Label>Phone Number:</css.Label>
                         <css.Text>{student.phone}</css.Text>
                     </css.FormRow>
+
+                    <css.FormRow>
+                        <css.Label>Parent Name:</css.Label>
+                        <css.Text>{student.parent.parentName}</css.Text>
+                    </css.FormRow>
+
+                    <css.FormRow>
+                        <css.Label>Parent Phone:</css.Label>
+                        <css.Text>{student.parent.parentPhone}</css.Text>
+                    </css.FormRow>
+
+                    <css.FormRow>
+                        <css.Label>Alternate POC Name:</css.Label>
+                        <css.Text>{student.parent.alternateName}</css.Text>
+                    </css.FormRow>
+
+                    <css.FormRow>
+                        <css.Label>Alternate POC Phone:</css.Label>
+                        <css.Text>{student.parent.alternatePhone}</css.Text>
+                    </css.FormRow>
                 </css.Section>
             }
         </css.FormContainer>

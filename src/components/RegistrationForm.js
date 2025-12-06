@@ -6,6 +6,8 @@ import css from "../styles.js"
 
 import StudentEditForm from "./StudentEditForm";
 
+import stemGroupImage from "../images/stem-group.jpg"
+
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 
@@ -147,8 +149,50 @@ function RegistrationForm() {
     }
 
     return (
+        <css.Section>
+            <css.ListContainer>
+
+                <css.FormTitle>2026 STEM-ING Event</css.FormTitle>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+
+                    <p style={{ flex: 1 }}>
+
+                        <p><strong>University System of Maryland at Southern Maryland</strong></p>
+                        <css.UrlLink to="https://www.google.com/maps/place/University+System+of+Maryland+at+Southern+Maryland/@38.3118954,-76.5462287,17.5z/data=!4m14!1m7!3m6!1s0x89b76605c3fac927:0xcb7d8b4b898010ae!2sCollege+of+Southern+Maryland,+Leonardtown+Campus!8m2!3d38.297538!4d-76.6333291!16s%2Fg%2F1tdbrrsw!3m5!1s0x89b763f52d07a4ff:0x6cdd6f6668f331ee!8m2!3d38.3125991!4d-76.5450797!16s%2Fg%2F1tfyfg4w?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D">
+                            44219 Airport Rd, California, MD 20619
+                        </css.UrlLink>
+                        <p>May 1, 2026 from 8:30am to 4pm EDT</p>
+                        <p>Home Site: 
+                            <css.UrlLink to="https://www.stem-ing.org/">  stem-ing.org</css.UrlLink>
+                        </p>
+                    </p>
+
+                    <img src={stemGroupImage} alt="Example" style={{ width: "250px" }} />
+                </div>
+
+                <br></br>
+
+                <css.ListContainer>
+                    <css.Title>Drop Off</css.Title>
+                    <p>You must sign in your student at the beginning of the day</p>
+                    <p>Preceed to registration table to receive welcome packet</p>
+                    <p><strong>ID is required</strong></p>
+                </css.ListContainer>
+
+                <br></br>
+
+                <css.ListContainer>
+                    <css.Title>Pick Up</css.Title>
+                    <p>You must sign out your student</p>
+                    <p><strong>ID is required</strong></p>
+                </css.ListContainer>
+            </css.ListContainer>
+
+            <br></br>
+
         <css.FormContainer>
-            <css.FormTitle>STEM 2026 Registration</css.FormTitle>
+            <css.FormTitle>Student Registration</css.FormTitle>
 
             {error && <css.ErrorMessage>{error}</css.ErrorMessage>}
 
@@ -306,7 +350,8 @@ function RegistrationForm() {
                     Complete Registration
                 </css.SubmitButton>
             </form>
-        </css.FormContainer>
+            </css.FormContainer>
+        </css.Section>
     );
 }
 

@@ -82,6 +82,8 @@ function VolunteerDashboard() {
                         <css.TableHead>
                         <css.TableRow>
                                 <css.TableHeader>Name</css.TableHeader>
+                                <css.TableHeader>Position</css.TableHeader>
+                                <css.TableHeader>Availability</css.TableHeader>
                         </css.TableRow>
                     </css.TableHead>
                     <tbody>
@@ -95,7 +97,13 @@ function VolunteerDashboard() {
                                     }>
                                         {vol.name}
                                     </css.Button>
-                                </css.TableCell>
+                                    </css.TableCell>
+                                    <css.TableCell>
+                                        <css.Text>{vol.job}</css.Text>
+                                    </css.TableCell>
+                                    <css.TableCell>
+                                        <css.Text>8:00 - 4:30</css.Text>
+                                    </css.TableCell>
                             </css.TableRow>
                         ))}
                     </tbody>

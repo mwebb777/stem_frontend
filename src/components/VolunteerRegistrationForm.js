@@ -6,6 +6,22 @@ import css from "../styles.js"
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
+const jobs = [
+    {
+        "name": "Art & Drawing",
+        "capacity": 20,
+        "description": "Explore various art mediums and drawing techniques.",
+        "instructor": "tbd"
+    },
+    {
+        "name": "Music Fundamentals",
+        "capacity": 15,
+        "description": "Introduction to music theory and basic instruments.",
+        "instructor": "tbd"
+    },
+];
+
+
 
 function VolunteerRegistrationForm() {
     const [classes, setClasses] = useState([]);
@@ -26,6 +42,8 @@ function VolunteerRegistrationForm() {
         phone: "",
         shirt: "",
         job: "none",
+        startTime: "08:00",
+        endTime: "17:00",
     });
 
     useEffect(() => {
@@ -138,7 +156,33 @@ function VolunteerRegistrationForm() {
                             required
                         />
                     </css.FormField>
+
+                    <css.FormField>
+                        <css.Label csscsshtmlFor="startTime">Start Time</css.Label>
+                        <css.Input
+                            type="time"
+                            id="startTime"
+                            name="startTime"
+                            value={volunteerInfo.startTime}
+                            onChange={handleInfoChange}
+                            required
+                        />
+                        <css.Label csshtmlFor="endTime">End Time</css.Label>
+                        <css.Input
+                            type="time"
+                            id="endTime"
+                            name="endTime"
+                            value={volunteerInfo.endTime}
+                            onChange={handleInfoChange}
+                            required
+                            />
+
+                    </css.FormField>
+
+                    <css.FormField>
+                    </css.FormField>
                 </css.Section>
+
 
                 <css.FormField>
                     <css.Label htmlFor="volunteerShirt">Shirt Size</css.Label>
@@ -183,6 +227,51 @@ function VolunteerRegistrationForm() {
                         onChange={handleInfoChange}
                     />
                 </css.FormField>
+
+                <css.FormField>
+                    <css.Label> Jobs</css.Label>
+
+                    {jobs.map((job) => (
+                        <css.Text>{job.name}</css.Text>
+                    ))}
+
+
+                </css.FormField>
+
+
+
+
+
+                {/*<css.ClassesSection>*/}
+                {/*    <css.Label>Volunteer Position</css.Label>*/}
+                {/*    <css.SelectionCount*/}
+                {/*        complete={student.class1.length === 1}*/}
+                {/*        tooMany={student.class1.length > 1}*/}
+                {/*    >*/}
+                {/*        {student.class1.length}/1 classes selected*/}
+                {/*    </css.SelectionCount>*/}
+
+                {/*    <css.ClassesList>*/}
+                {/*        {classes.map((cls) => (*/}
+                {/*            <css.ClassCard*/}
+                {/*                key={cls.id}*/}
+                {/*                selected={isClassSelected1(cls.id)}*/}
+                {/*                disabled={isClassDisabled1(cls)}*/}
+                {/*                onClick={() =>*/}
+                {/*                    !isClassDisabled1(cls) && toggleClassSelection1(cls.id)*/}
+                {/*                }*/}
+                {/*            >*/}
+                {/*                <css.ClassName>{cls.name}</css.ClassName>*/}
+                {/*                <css.ClassDescription>{cls.description}</css.ClassDescription>*/}
+                {/*                <css.AvailabilityInfo available={cls.available_session1 > 0}>*/}
+                {/*                    {cls.available_session1 > 0*/}
+                {/*                        ? `${cls.available_session1} spots available`*/}
+                {/*                        : "Class full"}*/}
+                {/*                </css.AvailabilityInfo>*/}
+                {/*            </css.ClassCard>*/}
+                {/*        ))}*/}
+                {/*    </css.ClassesList>*/}
+                {/*</css.ClassesSection>*/}
 
 
                 <css.Section>

@@ -433,6 +433,16 @@ export default {
       }
     `,
 
+    UrlLink: styled(Link)`
+      color: blue;
+      text-decoration: none;
+
+      &:hover {
+        color: #2980b9;
+        text-decoration: underline;
+      }
+    `,
+
     LinkButton: styled(Link)`
       display: inline-block;
       padding: 0.75rem 1.5rem;

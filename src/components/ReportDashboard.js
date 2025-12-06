@@ -204,6 +204,25 @@ function ReportDashboard() {
         }
     };
 
+    const handleStudentClassExport = async () => {
+        try {
+            const response = await axios.get(`${API_URL}/api/exportStudentClasses`, {
+                responseType: "blob" // important!
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "student_classes.csv");
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+        } catch (error) {
+            console.error("Export failed:", error);
+        }
+    };
+
     const handleVolunteerExport = async () => {
         try {
             const response = await axios.get(`${API_URL}/api/exportVolunteers`, {
@@ -339,6 +358,13 @@ function ReportDashboard() {
 
                             <css.DarkButton onClick={handleStudentExport}>
                                 Export Students CSV
+                            </css.DarkButton>
+
+                            <br></br>
+                            <br></br>
+
+                            <css.DarkButton onClick={handleStudentClassExport}>
+                                Export Student Classes CSV
                             </css.DarkButton>
 
                             <br></br>

@@ -14,20 +14,7 @@ import VolunteerRegistrationForm from "./components/VolunteerRegistrationForm";
 
 import { ThemeProvider, ThemeContext }  from "./context/RoleContext";
 
-// Consume Context in a Component
-const ThemeSwitcher = () => {
-    const { theme, toggleTheme } = useContext(ThemeContext);
 
-    function handleClick() {
-        window.userRole = 'Staff';
-    }
-
-    return (
-        <button onClick={handleClick}>
-        theme
-        </button>
-    );
-};
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -50,7 +37,6 @@ function App() {
         <Router>
             <AppContainer>
                 <ThemeProvider>
-                    <ThemeSwitcher />
                     <Header />
                     <MainContent>
                         <Routes>

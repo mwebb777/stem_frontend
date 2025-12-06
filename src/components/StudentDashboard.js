@@ -60,7 +60,8 @@ function StudentDashboard() {
         return <div>Loading dashboard data...</div>;
     }
 
-    //setStudentInfo(students[0]);
+    if (activeStudent == null || activeStudent == '')
+        setStudentInfo(students[0]);
 
     return (
         <styles.DashboardContainer>
