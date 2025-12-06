@@ -150,6 +150,8 @@ function ReportDashboard() {
     const [activeTab, setActiveTab] = useState("stats");
     const [classes, setClasses] = useState([]);
     const [students, setStudents] = useState([]);
+    const [volunteers, setVolunteers] = useState([]);
+    const [registrations, setRegistrations] = useState([]);
     const [studentShirts, setStudentShirts] = useState([]);
     const [volunteerShirts, setVolunteerShirts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -157,15 +159,19 @@ function ReportDashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [classesRes, studentRes, studentShirtRes, volunteerShirtRes] = await Promise.all([
+                const [classesRes, studentRes, volunteerRes, registrationRes, studentShirtRes, volunteerShirtRes] = await Promise.all([
                     axios.get(`${API_URL}/api/classes`),
                     axios.get(`${API_URL}/api/students`),
+                    axios.get(`${API_URL}/api/volunteers`),
+                    axios.get(`${API_URL}/api/registrations`),
                     axios.get(`${API_URL}/api/student_shirts`),
                     axios.get(`${API_URL}/api/volunteer_shirts`),
                 ]);
 
                 setClasses(classesRes.data);
                 setStudents(studentRes.data);
+                setVolunteers(volunteerRes.data);
+                setRegistrations(registrationRes.data);
                 setStudentShirts(studentShirtRes.data);
                 setVolunteerShirts(volunteerShirtRes.data);
                 setLoading(false);
@@ -258,6 +264,39 @@ function ReportDashboard() {
 
         } catch (error) {
             console.error("Export failed:", error);
+        }
+    };
+
+    const handleVolunteersEmail = async () => {
+
+        let emails = '';
+
+        volunteers.map((vol) => {
+            emails = emails + vol.email;
+            emails = emails + "; ";
+        }
+        );
+
+        try {
+            await navigator.clipboard.writeText(emails);
+        } catch (err) {
+
+        }
+    };
+
+    const handleParentsEmail = async () => {
+        let emails = '';
+
+        registrations.map((reg) => {
+            emails = emails + reg.parentInfo.email;
+            emails = emails + "; ";
+        }
+        );
+
+        try {
+            await navigator.clipboard.writeText(emails);
+        } catch (err) {
+
         }
     };
 
@@ -380,6 +419,21 @@ function ReportDashboard() {
                             <css.DarkButton onClick={handleParentsExport}>
                                 Export Parents CSV
                             </css.DarkButton>
+
+                            <br></br>
+                            <br></br>
+
+                            <css.DarkButton onClick={handleVolunteersEmail}>
+                                Volunteers Email List - copied to clipboard
+                            </css.DarkButton>
+
+                            <br></br>
+                            <br></br>
+
+                            <css.DarkButton onClick={handleParentsEmail}>
+                                Parents Email List - copied to clipboard
+                            </css.DarkButton>
+
                         </css.Section>
                     }
                 </p>
