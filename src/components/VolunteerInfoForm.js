@@ -89,6 +89,11 @@ function VolunteerInfoForm({
                 </css.DarkButton>
             </css.FormRow>
 
+            <css.FormRow>
+                <css.Label>Position:</css.Label>
+                <css.Text>{volunteer.job}</css.Text>
+            </css.FormRow>
+
              <css.FormRow>
                 <css.Label>Food Allergies:</css.Label>
                 <css.Text>{volunteer.allergies}</css.Text>

@@ -6,25 +6,8 @@ import css from "../styles.js"
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
-const jobs = [
-    {
-        "name": "Art & Drawing",
-        "capacity": 20,
-        "description": "Explore various art mediums and drawing techniques.",
-        "instructor": "tbd"
-    },
-    {
-        "name": "Music Fundamentals",
-        "capacity": 15,
-        "description": "Introduction to music theory and basic instruments.",
-        "instructor": "tbd"
-    },
-];
-
-
-
 function VolunteerRegistrationForm() {
-    const [classes, setClasses] = useState([]);
+    const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedShirt, setSelectedShirt] = useState("");
@@ -47,18 +30,19 @@ function VolunteerRegistrationForm() {
     });
 
     useEffect(() => {
-        const fetchClasses = async () => {
+        const fetchJobs = async () => {
             try {
-                const response = await axios.get(`${API_URL}/api/classes`);
-                setClasses(response.data);
+                const response = await axios.get(`${API_URL}/api/jobs`);
+
+                setJobs(response.data.jobs);
                 setLoading(false);
             } catch (err) {
-                setError("Failed to load available classes. Please try again later.");
+                setError("Failed to load available positions. Please try again later.");
                 setLoading(false);
             }
         };
 
-        fetchClasses();
+        fetchJobs();
     }, []);
 
     const handleInfoChange = (e) => {
@@ -79,7 +63,7 @@ function VolunteerRegistrationForm() {
             });
 
             if (response.data.success) {
-                navigate(`/volunteer_success/${response.data.registrationId}`);
+                navigate(`/volunteer_success/${response.data.id}`);
             }
         } catch (err) {
             setError(
@@ -91,11 +75,49 @@ function VolunteerRegistrationForm() {
     const isFormValid = () => {
         if (!volunteerInfo.name || !volunteerInfo.email || !volunteerInfo.phone ||
             !volunteerInfo.password || !volunteerInfo.shirt || 
-            !isWaiver1Checked || !isWaiver2Checked || !isWaiver3Checked) {
+            !isWaiver1Checked || !isWaiver2Checked || !isWaiver3Checked || (volunteerInfo.job == 'none')) {
             return false;
         }
         return true;
     };
+
+    const toggleJobSelection = (jobName) => {
+        const currentSelection = volunteerInfo.job;
+
+        // If already selected, remove it
+        if (currentSelection == jobName) {
+            currentSelection = '';
+            setVolunteerInfo((prev) => ({
+                ...prev,
+                job: currentSelection,
+            }));
+            return;
+        }
+        else {
+            setVolunteerInfo((prev) => ({
+                ...prev,
+                job: jobName,
+            }));
+            return;
+        }
+        return;
+    };
+
+    const isJobSelected = (jobName) => {
+        return volunteerInfo.job == jobName;
+    };
+
+    const isJobDisabled = (job) => {
+        // If already selected, never disabled
+        if (isJobSelected(job.name)) return false;
+
+        // If at max selections, disable unselected classes
+        //if (student.class1.length >= 1) return true;
+
+        // If job is full, disable it
+        return job.available <= 0;
+    };
+
 
     const shirtSizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
@@ -228,50 +250,29 @@ function VolunteerRegistrationForm() {
                     />
                 </css.FormField>
 
-                <css.FormField>
-                    <css.Label> Jobs</css.Label>
-
-                    {jobs.map((job) => (
-                        <css.Text>{job.name}</css.Text>
-                    ))}
-
-
-                </css.FormField>
-
-
-
-
-
-                {/*<css.ClassesSection>*/}
-                {/*    <css.Label>Volunteer Position</css.Label>*/}
-                {/*    <css.SelectionCount*/}
-                {/*        complete={student.class1.length === 1}*/}
-                {/*        tooMany={student.class1.length > 1}*/}
-                {/*    >*/}
-                {/*        {student.class1.length}/1 classes selected*/}
-                {/*    </css.SelectionCount>*/}
-
-                {/*    <css.ClassesList>*/}
-                {/*        {classes.map((cls) => (*/}
-                {/*            <css.ClassCard*/}
-                {/*                key={cls.id}*/}
-                {/*                selected={isClassSelected1(cls.id)}*/}
-                {/*                disabled={isClassDisabled1(cls)}*/}
-                {/*                onClick={() =>*/}
-                {/*                    !isClassDisabled1(cls) && toggleClassSelection1(cls.id)*/}
-                {/*                }*/}
-                {/*            >*/}
-                {/*                <css.ClassName>{cls.name}</css.ClassName>*/}
-                {/*                <css.ClassDescription>{cls.description}</css.ClassDescription>*/}
-                {/*                <css.AvailabilityInfo available={cls.available_session1 > 0}>*/}
-                {/*                    {cls.available_session1 > 0*/}
-                {/*                        ? `${cls.available_session1} spots available`*/}
-                {/*                        : "Class full"}*/}
-                {/*                </css.AvailabilityInfo>*/}
-                {/*            </css.ClassCard>*/}
-                {/*        ))}*/}
-                {/*    </css.ClassesList>*/}
-                {/*</css.ClassesSection>*/}
+                <css.ClassesSection>
+                    <css.Label>Volunteer Position</css.Label>
+                    <css.ClassesList>
+                        {jobs.map((job) => (
+                            <css.ClassCard
+                                key={job.id}
+                                selected={isJobSelected(job.name)}
+                                disabled={isJobDisabled(job)}
+                                onClick={() =>
+                                    !isJobDisabled(job) && toggleJobSelection(job.name)
+                                }
+                            >
+                                <css.ClassName>{job.name}</css.ClassName>
+                                <css.ClassDescription>{job.description}</css.ClassDescription>
+                                <css.AvailabilityInfo available={job.available > 0}>
+                                    {job.available > 0
+                                        ? `${job.available} spots available`
+                                        : "Class full"}
+                                </css.AvailabilityInfo>
+                            </css.ClassCard>
+                        ))}
+                    </css.ClassesList>
+                </css.ClassesSection>
 
 
                 <css.Section>

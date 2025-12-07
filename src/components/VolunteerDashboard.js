@@ -4,6 +4,7 @@ import axios from "axios";
 import css from "../styles.js"
 
 import VolunteerInfoForm from "./VolunteerInfoForm";
+import VolunteerJobList from "./VolunteerJobList";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -17,17 +18,20 @@ const setActiveVolunteer = (volunteer) => {
 function VolunteerDashboard() {
     const [activeTab, setActiveTab] = useState("list");
     const [volunteers, setVolunteers] = useState([]);
+    const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [volunteersRes] = await Promise.all([
+                const [volunteersRes, jobsRes] = await Promise.all([
                     axios.get(`${API_URL}/api/volunteers`),
+                    axios.get(`${API_URL}/api/jobs`),
                 ]);
 
                 setVolunteers(volunteersRes.data);
+                setJobs(jobsRes.data.jobs);
                 setLoading(false);
             } catch (err) {
                 console.error("Failed to load data:", err);
@@ -66,6 +70,12 @@ function VolunteerDashboard() {
                 >
                     Info
                 </css.Tab>
+                <css.Tab
+                    active={activeTab === "jobs"}
+                    onClick={() => setActiveTab("jobs")}
+                >
+                    Positions
+                </css.Tab>
             </css.TabsContainer>
 
             {activeTab === "list" && (
@@ -102,7 +112,7 @@ function VolunteerDashboard() {
                                         <css.Text>{vol.job}</css.Text>
                                     </css.TableCell>
                                     <css.TableCell>
-                                        <css.Text>8:00 - 4:30</css.Text>
+                                        <css.Text>{vol.startTime} - {vol.endTime}</css.Text>
                                     </css.TableCell>
                             </css.TableRow>
                         ))}
@@ -119,6 +129,19 @@ function VolunteerDashboard() {
                 </p>
             )}
 
+            {activeTab === "jobs" && (
+                <p>
+                    {jobs.map((j) => ( 
+
+                        <VolunteerJobList
+                            volunteers={volunteers}
+                            job={j}
+                        />
+                    
+                    ))}
+
+                </p>
+            )}
         </css.DashboardContainer>
     );
 }
